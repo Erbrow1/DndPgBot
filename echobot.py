@@ -19,25 +19,28 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
+    print(f"<@{update.effective_user['username']}> {update.message.text}")
     update.message.reply_text('Hi!')
 
 
 def help(update, context):
     """Send a message when the command /help is issued."""
+    print(f"<@{update.effective_user['username']}> {update.message.text}")
     update.message.reply_text('Help!')
 
 
 def echo(update, context):
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
     print(f"<@{update.effective_user['username']}> {update.message.text}")
+    update.message.reply_text(update.message.text)
 
 def fact(update, context):
     """Gets a random fact"""
+    print(f"<@{update.effective_user['username']}> {update.message.text}")
     try:
         r = requests.get("https://uselessfacts.jsph.pl/random.json", timeout=5)
         data = r.json()
-        update.message.reply_text(f"__{data['text'].replace(' ', '__ __')}__ ({data['source']})")
+        update.message.reply_text(f"{data['text']} ({data['source']})")
     except:
         update.message.reply_text("Could not fetch a random fact")
 
