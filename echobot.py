@@ -4,6 +4,7 @@
 
 import json
 import logging
+import requests
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -30,6 +31,15 @@ def echo(update, context):
     """Echo the user message."""
     update.message.reply_text(update.message.text)
     print(f"<@{update.effective_user['username']}> {update.message.text}")
+
+def fact(update, context):
+    """Gets a random fact"""
+    try:
+        r = requests.get("https://uselessfacts.jsph.pl/random.json", timeout=5)
+        fact = r.json()["text"]
+        update.message.reply_text(fact)
+    except:
+        update.message.reply_text("Could not fetch a random fact")
 
 def stop(update, context):
     update.message.reply_text("Ok, terminating")
