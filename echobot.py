@@ -41,11 +41,6 @@ def fact(update, context):
     except:
         update.message.reply_text("Could not fetch a random fact")
 
-def stop(update, context):
-    update.message.reply_text("Ok, terminating")
-    exit() # eww will not exit gracefully
-
-
 def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
@@ -69,7 +64,6 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fact", fact))
-    dp.add_handler(CommandHandler("stop", stop))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
