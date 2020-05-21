@@ -4,7 +4,7 @@
 
 import json
 import logging
-import requests
+import request
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -44,6 +44,15 @@ def fact(update, context):
     except:
         update.message.reply_text("Could not fetch a random fact")
 
+def classes(update,context):
+    "Gets list of classes"
+    with open(classes) as fc:
+        data = fx.read().split("\n")
+        for elem in data:
+        print(elem+"\n")
+        
+        
+    
 def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
@@ -67,6 +76,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fact", fact))
+    dp.add_handler(CommandHandler("classes",classes))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
