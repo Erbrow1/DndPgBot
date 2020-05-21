@@ -36,8 +36,8 @@ def fact(update, context):
     """Gets a random fact"""
     try:
         r = requests.get("https://uselessfacts.jsph.pl/random.json", timeout=5)
-        fact = r.json()["text"]
-        update.message.reply_text(fact)
+        data = r.json()
+        update.message.reply_text(f"_{data['text']}_ ([{data['source']}]({data['source_url']}))")
     except:
         update.message.reply_text("Could not fetch a random fact")
 
