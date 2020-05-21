@@ -31,6 +31,10 @@ def echo(update, context):
     update.message.reply_text(update.message.text)
     print(f"<@{update.effective_user['username']}> {update.message.text}")
 
+def stop(update, context):
+    update.message.reply_text("Ok, terminating")
+    exit() # eww will not exit gracefully
+
 
 def error(update, context):
     """Log Errors caused by Updates."""
@@ -39,6 +43,7 @@ def error(update, context):
 
 def main():
     """Start the bot."""
+    print("[*] Starting bot")
     # Load config
     with open("config.json") as f:
         config = json.load(f)
@@ -67,6 +72,7 @@ def main():
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.
     updater.idle()
+    print("[x] Stopping bot")
 
 
 if __name__ == '__main__':
