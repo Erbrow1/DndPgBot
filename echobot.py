@@ -59,7 +59,7 @@ def classes(update,context):
 
 def me(update,context):
     """Selfe informations"""
-    user=update.effective_user
+    user=<@{update.effective_user}>
     print(f"user['username'] {update.message.text}")
     update.message,reply_text("Benvenuto"+ user['username']+" \nNome :"+ user['first_name'] +"\nCognome: "+user['last_name'])
 
