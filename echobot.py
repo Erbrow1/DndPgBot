@@ -71,7 +71,11 @@ def main():
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
     updater = Updater(config["TOKEN"], use_context=True)
-
+    
+    class telegram.User(id, first_name, is_bot, last_name=None,
+        username=None, language_code=None, can_join_groups=None, 
+        can_read_all_group_messages=None, supports_inline_queries=None, bot=None, **kwargs)
+    
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
@@ -80,7 +84,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fact", fact))
     dp.add_handler(CommandHandler("classes",classes))
-
+    
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
