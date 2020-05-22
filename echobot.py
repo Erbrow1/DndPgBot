@@ -45,7 +45,7 @@ def fact(update, context):
         update.message.reply_text("Could not fetch a random fact")
 
 def classes(update,context):
-    "Gets list of classes"
+    """Gets list of classes"""
     with open(classes) as fc:
         data = fx.read().split("\n")
         for elem in data:
