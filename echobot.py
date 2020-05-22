@@ -9,6 +9,7 @@ import requests
 from uuid import uuid4
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
+all_user_data=dict()
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -54,7 +55,7 @@ def classes(update,context):
         message= message+"\n"+elem
 
     update.message.reply_text(message)
-ll_user_data = dict()
+
 
 def put(update, context):
     """Usage: /put value"""
