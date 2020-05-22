@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 def start(update, context):
     """Send a message when the command /start is issued."""
     print(f"<@{update.effective_user['username']}> {update.message.text}")
-    update.message.reply_text('Hi!')
+    update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
 
 
 def help(update, context):
