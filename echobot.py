@@ -49,7 +49,7 @@ def classes(update,context):
     with open(classes) as fc:
         data = fx.read().split("\n")
         for elem in data:
-        print(elem+"\n")
+            print(elem)
         
         
     
