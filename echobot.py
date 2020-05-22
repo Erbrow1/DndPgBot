@@ -48,6 +48,7 @@ def fact(update, context):
 
 def classes(update,context):
     """Gets list of classes"""
+    print(f"<@{update.effective_user['username']}> {update.message.text}")
     message="Le classi sono :"
     with open("classes.txt") as fc:
         data = fc.read().split("\n")
@@ -55,6 +56,12 @@ def classes(update,context):
         message= message+"\n"+elem
 
     update.message.reply_text(message)
+
+def me(update,context)
+    "Selfe informations"
+    print(f"<@{update.effective_user['username']}> {update.message.text}")
+    update.message,reply_text("Benvenuto <@{update.effective_user['username']>}")
+    update.message,reply_text("Nome : <@{update.effective_user['first_name']>}\nCognome : <@{update.effective_user['last_name']}>")
 
     
 def error(update, context):
@@ -82,7 +89,8 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fact", fact))
     dp.add_handler(CommandHandler("classes",classes))
-
+    dp.add_handler(CommandHandler("me",me))
+    
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
