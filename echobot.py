@@ -82,8 +82,6 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fact", fact))
     dp.add_handler(CommandHandler("classes",classes))
-    dp.add_handler(CommandHandler("put",put))
-    dp.add_handler(CommandHandler("get",get))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
