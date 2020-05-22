@@ -46,10 +46,13 @@ def fact(update, context):
 
 def classes(update,context):
     """Gets list of classes"""
+    message="Le classi sono :"
     with open("classes.txt") as fc:
         data = fc.read().split("\n")
     for elem in data:
-        update.message.reply_text(elem)
+        message= message+"\n"+elem
+
+    update.message.reply_text(message)
         
         
     
