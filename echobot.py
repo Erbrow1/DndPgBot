@@ -6,6 +6,7 @@ import json
 import logging
 import requests
 
+from uuid import uuid4
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Enable logging
@@ -53,8 +54,42 @@ def classes(update,context):
         message= message+"\n"+elem
 
     update.message.reply_text(message)
-        
-        
+ll_user_data = dict()
+
+def put(update, context):
+    """Usage: /put value"""
+    # Generate ID and seperate value from command
+    key = str(uuid4())
+    value = update.message.text.partition(' ')[2]
+
+    user_id = update.message.from_user.id
+
+    # Create user dict if it doesn't exist
+    if user_id not in all_user_data:
+        all_user_data[user_id] = dict()
+
+    # Store value
+    user_data = all_user_data[user_id]
+    user_data[key] = value
+
+    update.message.reply_text(key)
+
+def get(update, context):
+    """Usage: /get uuid"""
+    # Seperate ID from command
+    key = update.message.text.partition(' ')[2]
+
+    user_id = update.message.from_user.id
+
+    # Load value
+    try:
+        user_data = all_user_data[user_id]
+        value = user_data[key]
+        update.message.reply_text(value)
+
+    except KeyError:
+        update.message.reply_text('Not found')
+               
     
 def error(update, context):
     """Log Errors caused by Updates."""
@@ -72,10 +107,7 @@ def main():
     # Post version 12 this will no longer be necessary
     updater = Updater(config["TOKEN"], use_context=True)
     
-    class telegram.User(id, first_name, is_bot, last_name=None,
-        username=None, language_code=None, can_join_groups=None, 
-        can_read_all_group_messages=None, supports_inline_queries=None, bot=None, **kwargs)
-    
+        
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
@@ -84,7 +116,9 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("fact", fact))
     dp.add_handler(CommandHandler("classes",classes))
-    
+    dp.add_handler(CommandHandler("put",put))
+    dp.add_handler(CommandHandler("get",get))
+
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
