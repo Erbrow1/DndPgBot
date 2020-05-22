@@ -59,7 +59,7 @@ def classes(update,context):
 
 def me(update,context):
     """Selfe informations"""
-    user= Telegram.User()
+    user= telegram.User()
     user= update.effective_user
     
     print(f"<user['username']> {update.message.text}")
