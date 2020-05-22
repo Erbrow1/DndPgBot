@@ -57,7 +57,7 @@ def classes(update,context):
 
     update.message.reply_text(message)
 
-def me(update,context)
+def me(update,context):
     "Selfe informations"
     print(f"<@{update.effective_user['username']}> {update.message.text}")
     update.message,reply_text("Benvenuto <@{update.effective_user['username']>}")
