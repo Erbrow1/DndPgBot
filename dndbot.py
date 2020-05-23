@@ -82,7 +82,7 @@ def display(query, field, value=None):
     else:
         txt = "TODO"
     reply_markup = InlineKeyboardMarkup(MENUS[field])
-    context.bot.send_photo(chat_id=chat_id, photo={DESCRIPTIONS[Barbarian]})
+    reply_photo(photo={DESCRIPTIONS[Barbarian]})
 
     query.edit_message_text(text=txt, reply_markup=reply_markup)
 
