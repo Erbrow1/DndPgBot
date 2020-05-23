@@ -61,7 +61,7 @@ def me(update,context):
     """Self informations"""
    # user= link()
     print(f"<@{update.effective_user['username']}> {update.message.text}")
-    update.message,reply_text("Benvenuto"+ user['username']+" \nNome :"+ user['first_name'] +"\nCognome: "+user['last_name'])
+    update.message,reply_text("Benvenuto"+ update.effective_user['username']+" \nNome :"+ update.effective_user['first_name'] +"\nCognome: "+update.effective_user['last_name'])
 
     
 def error(update, context):
