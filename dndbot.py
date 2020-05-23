@@ -25,7 +25,7 @@ def start(update, context):
     update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
 
 def inline(update, context):
-keyboard = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
+    keyboard = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
                      InlineKeyboardButton("Bardo", callback_data='Bardo')],
                     [InlineKeyboardButton("Chierico", callback_data='Chierico'),
                   InlineKeyboardButton("Druido", callback_data='Druido')],
