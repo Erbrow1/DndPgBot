@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ -*- coding: utf-8 -*-
 # This program is dedicated to the public domain under the CC0 license
 
 import json
@@ -57,6 +57,24 @@ def makepg(update, context):
             "gay": "100%"
     }
     
+    keyboard = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
+                    InlineKeyboardButton("Bardo", callback_data='Bardo')],
+                    [InlineKeyboardButton("Chierico", callback_data='Chierico'),
+                    InlineKeyboardButton("Druido", callback_data='Druido')],
+                    [InlineKeyboardButton("Guerriero", callback_data='Guerriero'),
+                    InlineKeyboardButton("Ladro", callback_data='Ladro')],
+                    [InlineKeyboardButton("Mago", callback_data='Mago'),
+                    InlineKeyboardButton("Monaco", callback_data='Monaco')],
+                    [InlineKeyboardButton("Paladino", callback_data='Paladino'),
+                    InlineKeyboardButton("Ranger", callback_data='Ranger')],
+                    [InlineKeyboardButton("Stregone", callback_data='Stregone'),
+                    InlineKeyboardButton("Warlock", callback_data='Warlock')]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    update.message.reply_text('Please choose:', reply_markup=reply_markup)
+    
+    #query.message.message_id
+    pg['class']=query.data
+
     with open(f"{name}.json", "w") as f:
         json.dump(pg, f)
     update.message.reply_text(f"Made a new char named {name}")
