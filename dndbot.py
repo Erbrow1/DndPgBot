@@ -51,10 +51,10 @@ def help(update, context):
     update.message.reply_text('Lista comandi:\n/help (mostra questa lista)\n/me (informazioni utente)\n/makepg \"NomePg\" (Crea nuovo personaggio)\n/roll \"Number\" (estrae un numero casuale tra 1 e Number)')
 
 def roll(update,context):
-    if context.args[0] != None :
-        num= random.randint(1,int(context.args[0]))
-    else: 
+    if len(context.args)<1 :
         num= random.randint(1,20)
+    else: 
+        num= random.randint(1,int(context.args[0]))
     update.message.reply_text(f"You rolled {num}") 
 
 def button(update, context):
