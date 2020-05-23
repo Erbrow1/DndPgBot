@@ -38,7 +38,6 @@ def button(update, context):
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     query.answer()
-    return query.data
     query.edit_message_text(text="Selected option: {}".format(query.data))
 
 def makepg(update, context):
@@ -49,7 +48,6 @@ def makepg(update, context):
             "class": "UNKNOWN",
             "gay": "100%"
     }
-    pg[class]=inline(update,context)
     update.message,reply_text(f"You choose {pg[class]}")
     with open(f"{name}.json", "w") as f:
         json.dump(pg, f)
