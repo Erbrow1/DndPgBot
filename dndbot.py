@@ -48,7 +48,7 @@ def start(update, context):
     update.message.reply_text(f'Hey {update.effective_user['username'] \nWelcome to TESTANVEDICHEBOT!!\n Here you can create your DnD Characters. Enjoy it!!')
 
 def help(update, context):
-    update.message.reply_text('Command List:\n/help (Show this list)\n/me (User informations)\n/makepg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)')
+    update.message.reply_text("Command List:\n/help (Show this list)\n/me (User informations)\n/makepg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)")
 
 def roll(update,context):
     if len(context.args)<1 :
