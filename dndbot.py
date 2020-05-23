@@ -49,7 +49,7 @@ def button(update, context):
             context.bot_data[uid]["race"] = ""
             query.edit_message_text(text="Chosen class: {}".format(query.data))
             reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
-            update.message.reply_text('Choose your race', reply_markup=reply_markup)
+            query.reply_text('Choose your race', reply_markup=reply_markup)
     query.answer()
 
 def makepg(update, context):
