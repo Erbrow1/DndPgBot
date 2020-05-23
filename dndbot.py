@@ -71,8 +71,8 @@ def classes(update,context):
     update.message.reply_text(message)
 
 def interactive(update, context):
-    custom_keyboard = [['top-left', 'top-right'],
-                   ['bottom-left', 'bottom-right']]
+    custom_keyboard = [['sei puttana', 'sei gay'],
+                   ['sei op', 'sei ok']]
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
     context.bot.send_message(chat_id=update.message.chat_id,
                  text="Custom Keyboard Test",
