@@ -37,8 +37,8 @@ def inline(update, context):
                   InlineKeyboardButton("Ranger", callback_data='Ranger')],
                   [InlineKeyboardButton("Stregone", callback_data='Stregone'),
                   InlineKeyboardButton("Warlock", callback_data='Warlock')]]
-        reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text('Please choose:', reply_markup=reply_markup)
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    update.message.reply_text('Please choose:', reply_markup=reply_markup)
 
 def button(update, context):
     query = update.callback_query
