@@ -68,7 +68,7 @@ def me(update,context):
     user = update.effective_user
     update.message.reply_text("Benvenuto"+ user['username']+" \nNome :"+ user['first_name'] +"\nCognome: "+user['last_name'])
 
->>>>>>> 4817f696eb5ce63c9472c506f782af9f1c312fe8
+#>>>>>>> 4817f696eb5ce63c9472c506f782af9f1c312fe8
 
 def error(update, context):
     """Log Errors caused by Updates."""
