@@ -47,7 +47,12 @@ def start(update, context):
     update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
 
 def help(update, context):
-    update.message.reply_text('Lista comandi:\n/help (mostra questa lista)\n/me (informazioni utente)\n/makepg \"NomePg\" (Crea nuovo personaggio)')
+    update.message.reply_text('Lista comandi:\n/help (mostra questa lista)\n/me (informazioni utente)\n
+            /makepg \"NomePg\" (Crea nuovo personaggio)\n/roll \"Number\" (estrae un numero casuale tra 1 e Number)')
+
+def roll(update,context)def roll(update,context):
+    num= random.randint(1,int(context.args[0]))
+    update.message.reply_text(f"You rolled {num}") 
 
 def button(update, context):
     query = update.callback_query
@@ -144,6 +149,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("me",me))
     dp.add_handler(CommandHandler("makepg",makepg))
+    dp.add_handler(CommandHandler("roll",roll))
     dp.add_handler(CommandHandler("help",help))
     dp.add_handler(CommandHandler("listchar", listchar))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
