@@ -26,9 +26,9 @@ def start(update, context):
     update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
 
 def inline(update, context):
-    keyboard = [[InlineKeyboardButton("Guerriero", callback_data='gay'),
-                 InlineKeyboardButton("Stregone", callback_data='mago triste')],
-                [InlineKeyboardButton("Ranger", callback_data='mado e` uno scherzo?')]]
+    keyboard = [[InlineKeyboardButton("Guerriero", callback_data='Guerriero'),
+                 InlineKeyboardButton("Stregone", callback_data='Stregone')],
+                [InlineKeyboardButton("Ranger", callback_data='Ranger')]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     update.message.reply_text('Please choose:', reply_markup=reply_markup)
 
@@ -38,7 +38,7 @@ def button(update, context):
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     query.answer()
-
+    return query.data
     query.edit_message_text(text="Selected option: {}".format(query.data))
 
 def makepg(update, context):
@@ -49,6 +49,8 @@ def makepg(update, context):
             "class": "UNKNOWN",
             "gay": "100%"
     }
+    pg[class]=inline(update,context)
+    update.message,reply_text(f"You choose {pg[class]}")
     with open(f"{name}.json", "w") as f:
         json.dump(pg, f)
     update.message.reply_text(f"Made a new char named {name}")
