@@ -45,10 +45,10 @@ pg_base = {
 def start(update, context):
     """Send a message when the command /start is issued."""
     print(f"<@{update.effective_user['username']}> {update.message.text}")
-    update.message.reply_text(f'Hey {update.effective_user['username'] \nWelcome to TESTANVEDICHEBOT!!\n Here you can create your DnD Characters. Enjoy it!!')
+    update.message.reply_text(f"Hey {update.effective_user['username'] \nWelcome to TESTANVEDICHEBOT!!\n Here you can create your DnD Characters. Enjoy it!!")
 
 def help(update, context):
-    update.message.reply_text("Command List:\n/help (Show this list)\n/me (User informations)\n/makepg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)")
+    update.message.reply_text('Command List:\n/help (Show this list)\n/me (User informations)\n/makepg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)')
 
 def roll(update,context):
     if len(context.args)<1 :
