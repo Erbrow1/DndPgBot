@@ -53,7 +53,7 @@ MENUS = {
     }
 
 DESCRIPTIONS = {
-    "Barbarian" : "To a barbarian, though, civilization is no virtue, but a sign of weakness. The strong embrace their animal nature—keen instincts, primal physicality, and ferocious rage. ... Barbarians come alive in the chaos of combat.\n They can enter a berserk state where rage takes over, giving them superhuman strength and resilience.",
+    "Barbarian" : "https://i.pinimg.com/originals/d3/e1/4b/d3e14b7c318ff2ddb4fe25fda8757d4f.jpg\nTo a barbarian, though, civilization is no virtue, but a sign of weakness. The strong embrace their animal nature—keen instincts, primal physicality, and ferocious rage. ... Barbarians come alive in the chaos of combat.\n They can enter a berserk state where rage takes over, giving them superhuman strength and resilience.",
     "Wizard": "Skiidaadle Skidoodle your dick is now a noodle,hehehehe",
     "Neutral": "Literally wanted to play edgy evil character but party said NO"
     }
