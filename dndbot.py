@@ -32,10 +32,6 @@ def help(update, context):
     update.message.reply_text('Help!')
 
 
-def echo(update, context):
-    """Echo the user message."""
-    print(f"<@{update.effective_user['username']}> {update.message.text}")
-    update.message.reply_text(update.message.text)
 
 def fact(update, context):
     """Gets a random fact"""
