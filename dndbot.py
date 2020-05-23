@@ -53,7 +53,7 @@ MENUS = {
     }
 
 DESCRIPTIONS = {
-    "Barbarian": "ooga booga break bones",
+    "Barbarian": "https://i.pinimg.com/originals/d3/e1/4b/d3e14b7c318ff2ddb4fe25fda8757d4f.jpg",
     "Wizard": "Skiidaadle Skidoodle your dick is now a noodle",
     "Neutral": "Literally wanted to play edgy evil character but party said NO"
     }
@@ -82,6 +82,8 @@ def display(query, field, value=None):
     else:
         txt = "TODO"
     reply_markup = InlineKeyboardMarkup(MENUS[field])
+    context.bot.send_photo(chat_id=chat_id, photo={DESCRIPTIONS[Barbarian]})
+
     query.edit_message_text(text=txt, reply_markup=reply_markup)
 
 def button(update, context):
