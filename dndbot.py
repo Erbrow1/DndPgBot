@@ -62,7 +62,7 @@ DESCRIPTIONS = {
                    "civilization is no virtue, but a sign of weakness. The strong embrace their animal nature—keen instincts, "
                    "primal physicality, and ferocious rage. ... Barbarians come alive in the chaos of combat.\n They can "
                    "enter a berserk state where rage takes over, giving them superhuman strength and resilience."),
-    "Bard: : ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png/n"
+    "Bard": : ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png/n"
                   "The bard is a standard playable character class in many editions of the Dungeons & Dragons fantasy role-playing game."
                   " The bard class is versatile, capable of combat and of magic (divine magic in earlier editions, arcane magic in later editions). Bards use their artistic talents to induce magical effects.")
     "Cleric" :("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/371/420/618/636272706155064423.png/n"
