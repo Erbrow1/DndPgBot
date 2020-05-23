@@ -82,7 +82,7 @@ def display(query, field, value=None):
     else:
         txt = "TODO"
     reply_markup = InlineKeyboardMarkup(MENUS[field])
-    reply_photo(photo={DESCRIPTIONS[Barbarian]})
+    message.reply_photo(photo={DESCRIPTIONS[Barbarian]})
 
     query.edit_message_text(text=txt, reply_markup=reply_markup)
 
