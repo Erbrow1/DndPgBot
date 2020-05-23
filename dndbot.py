@@ -48,7 +48,6 @@ def makepg(update, context):
             "class": "UNKNOWN",
             "gay": "100%"
     }
-    update.message,reply_text(f"You choose {pg[class]}")
     with open(f"{name}.json", "w") as f:
         json.dump(pg, f)
     update.message.reply_text(f"Made a new char named {name}")
