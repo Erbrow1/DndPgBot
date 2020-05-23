@@ -59,11 +59,17 @@ def classes(update,context):
 
 def me(update,context):
     """Self informations"""
+<<<<<<< HEAD
    # user= link()
     print(f"<@{update.effective_user['username']}> {update.message.text}")
     update.message,reply_text("Benvenuto"+ update.effective_user['username']+" \nNome :"+ update.effective_user['first_name'] +"\nCognome: "+update.effective_user['last_name'])
+=======
+    print(f"<@{update.effective_user['username']}> {update.message.text}")
+    user = update.effective_user
+    update.message.reply_text("Benvenuto"+ user['username']+" \nNome :"+ user['first_name'] +"\nCognome: "+user['last_name'])
 
-    
+>>>>>>> 4817f696eb5ce63c9472c506f782af9f1c312fe8
+
 def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
@@ -79,8 +85,8 @@ def main():
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
     updater = Updater(config["TOKEN"], use_context=True)
-    
-        
+
+
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
@@ -90,7 +96,7 @@ def main():
     dp.add_handler(CommandHandler("fact", fact))
     dp.add_handler(CommandHandler("classes",classes))
     dp.add_handler(CommandHandler("me",me))
-    
+
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
