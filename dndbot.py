@@ -81,17 +81,6 @@ def listchar(update, context):
         text += f"{char['name']} ({char['class']}) : {char['gay']} homosexual\n"
     update.message.reply_text(text)
 
-def classes(update,context):
-    """Gets list of classes"""
-    print(f"<@{update.effective_user['username']}> {update.message.text}")
-    message="Le classi sono :"
-    with open("classes.txt") as fc:
-        data = fc.read().split("\n")
-    for elem in data:
-        message= message+"\n"+elem
-
-    update.message.reply_text(message)
-
 def interactive(update, context):
     custom_keyboard = [['sei puttana', 'sei gay'],
                    ['sei op', 'sei ok']]
@@ -134,7 +123,6 @@ def main():
 
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("classes",classes))
     dp.add_handler(CommandHandler("me",me))
     dp.add_handler(CommandHandler("makepg",makepg))
     dp.add_handler(CommandHandler("listchar", listchar))
