@@ -64,10 +64,10 @@ DESCRIPTIONS = {
                    "enter a berserk state where rage takes over, giving them superhuman strength and resilience."),
     "Bard": : ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png\n"
                   "The bard is a standard playable character class in many editions of the Dungeons & Dragons fantasy role-playing game."
-                  " The bard class is versatile, capable of combat and of magic (divine magic in earlier editions, arcane magic in later editions). Bards use their artistic talents to induce magical effects.")
+                  " The bard class is versatile, capable of combat and of magic (divine magic in earlier editions, arcane magic in later editions). Bards use their artistic talents to induce magical effects."),
     "Cleric" :("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/371/420/618/636272706155064423.png\n"
                  "Clerics are versatile figures, both capable in combat and skilled in the use of divine magic (thaumaturgy)."
-                 " Clerics are powerful healers due to the large number of healing and curative magics available to them. With divinely-granted abilities over life or death, they are also able to repel or control undead creatures.")
+                 " Clerics are powerful healers due to the large number of healing and curative magics available to them. With divinely-granted abilities over life or death, they are also able to repel or control undead creatures."),
     "Wizard": "Skiidaadle Skidoodle your dick is now a noodle,hehehehe",
     "Neutral": "Literally wanted to play edgy evil character but party said NO"
     }
