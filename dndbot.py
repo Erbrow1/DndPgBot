@@ -43,6 +43,8 @@ def button(update, context):
                 CHARACTERS[uid][context.bot_data[uid]['name']] = context.bot_data[uid]
             else:
                 CHARACTERS[uid] = { context.bot_data[uid]['name'] : context.bot_data[uid] }
+            with open("chardb.json", "w") as f:
+                json.dump(CHARACTERS, f)
             context.bot_data.pop(uid)
             query.message.reply_text("Character created succesfully")
         elif "class" in context.bot_data[uid]:
@@ -137,8 +139,6 @@ def main():
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.
     updater.idle()
-    with open("chardb.json", "w") as f:
-        json.dump(CHARACTERS, f)
     print("[x] Stopping bot")
 
 
