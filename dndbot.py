@@ -16,6 +16,20 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+CHARACTERS = {} # nested dict! First key is user_id, second key is character name
+
+CLASSES = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
+              InlineKeyboardButton("Bardo", callback_data='Bardo')],
+              [InlineKeyboardButton("Chierico", callback_data='Chierico'),
+              InlineKeyboardButton("Druido", callback_data='Druido')],
+              [InlineKeyboardButton("Guerriero", callback_data='Guerriero'),
+              InlineKeyboardButton("Ladro", callback_data='Ladro')],
+              [InlineKeyboardButton("Mago", callback_data='Mago'),
+              InlineKeyboardButton("Monaco", callback_data='Monaco')],
+              [InlineKeyboardButton("Paladino", callback_data='Paladino'),
+              InlineKeyboardButton("Ranger", callback_data='Ranger')],
+              [InlineKeyboardButton("Stregone", callback_data='Stregone'),
+              InlineKeyboardButton("Warlock", callback_data='Warlock')]]
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
@@ -25,18 +39,6 @@ def start(update, context):
     update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
 
 def inline(update, context):
-    keyboard = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
-                     InlineKeyboardButton("Bardo", callback_data='Bardo')],
-                    [InlineKeyboardButton("Chierico", callback_data='Chierico'),
-                  InlineKeyboardButton("Druido", callback_data='Druido')],
-                  [InlineKeyboardButton("Guerriero", callback_data='Guerriero'),
-                  InlineKeyboardButton("Ladro", callback_data='Ladro')],
-                  [InlineKeyboardButton("Mago", callback_data='Mago'),
-                  InlineKeyboardButton("Monaco", callback_data='Monaco')],
-                  [InlineKeyboardButton("Paladino", callback_data='Paladino'),
-                  InlineKeyboardButton("Ranger", callback_data='Ranger')],
-                  [InlineKeyboardButton("Stregone", callback_data='Stregone'),
-                  InlineKeyboardButton("Warlock", callback_data='Warlock')]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     update.message.reply_text('Please choose:', reply_markup=reply_markup)
 
@@ -45,21 +47,41 @@ def button(update, context):
 
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
+    uid = update.effective_user['id']
+    if uid in context.bot_data:
+        pg = context.bot_data[uid]
+        pg["class"] = query.data
+        if uid in CHARACTERS:
+            CHARACTERS[uid][pg['name']] = pg
+        else:
+            CHARACTERS[uid] = { pg['name'] : pg }
+        context.bot_data.pop(uid)
+        query.edit_message_text(text="Chosen class: {}".format(query.data))
     query.answer()
-    query.edit_message_text(text="Selected option: {}".format(query.data))
 
 def makepg(update, context):
     """Makes a new pg"""
+    if len(context.args) < 1:
+        return update.message.reply_text('[!] You need to provide a character name')
     name = context.args[0]
     pg = {
             "name": name,
             "class": "UNKNOWN",
             "gay": "100%"
     }
-    
-    with open(f"{name}.json", "w") as f:
-        json.dump(pg, f)
-    update.message.reply_text(f"Made a new char named {name}")
+    uid = update.effective_user['id']
+    if uid in context.bot_data:
+        return update.message.reply_text('[!] You are already making a character!')
+    context.bot_data[uid] = pg
+    reply_markup = InlineKeyboardMarkup(CLASSES)
+    update.message.reply_text('Choose your class', reply_markup=reply_markup)
+
+def listchar(update, context):
+    text = ""
+    for char in CHARACTERS[update.effective_user['id']]:
+        text += f"{char['name']} ({char['class']}) : {char['gay']} homosexual\n"
+    update.message.reply_text(text)
+
 
 def classes(update,context):
     """Gets list of classes"""
@@ -101,6 +123,8 @@ def main():
     # Load config
     with open("config.json") as f:
         config = json.load(f)
+    with open("chardb.json") as f:
+        CHARACTERS = json.load(f)
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
@@ -131,6 +155,8 @@ def main():
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.
     updater.idle()
+    with open("chardb.json", "w") as f:
+        json.dump(CHARACTERS, f)
     print("[x] Stopping bot")
 
 
