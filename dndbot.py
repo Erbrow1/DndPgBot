@@ -8,6 +8,7 @@ from uuid import uuid4
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler
 
+from definitions import CLASSES_BUTTONS, RACES_BUTTONS
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -17,29 +18,12 @@ logger = logging.getLogger(__name__)
 
 CHARACTERS = {} # nested dict! First key is user_id, second key is character name
 
-CLASSES = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
-              InlineKeyboardButton("Bardo", callback_data='Bardo')],
-              [InlineKeyboardButton("Chierico", callback_data='Chierico'),
-              InlineKeyboardButton("Druido", callback_data='Druido')],
-              [InlineKeyboardButton("Guerriero", callback_data='Guerriero'),
-              InlineKeyboardButton("Ladro", callback_data='Ladro')],
-              [InlineKeyboardButton("Mago", callback_data='Mago'),
-              InlineKeyboardButton("Monaco", callback_data='Monaco')],
-              [InlineKeyboardButton("Paladino", callback_data='Paladino'),
-              InlineKeyboardButton("Ranger", callback_data='Ranger')],
-              [InlineKeyboardButton("Stregone", callback_data='Stregone'),
-              InlineKeyboardButton("Warlock", callback_data='Warlock')]]
-
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
     print(f"<@{update.effective_user['username']}> {update.message.text}")
     update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
-
-def inline(update, context):
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text('Please choose:', reply_markup=reply_markup)
 
 def button(update, context):
     query = update.callback_query
@@ -72,7 +56,7 @@ def makepg(update, context):
     if uid in context.bot_data:
         return update.message.reply_text('[!] You are already making a character!')
     context.bot_data[uid] = pg
-    reply_markup = InlineKeyboardMarkup(CLASSES)
+    reply_markup = InlineKeyboardMarkup(CLASSES_BUTTONS)
     update.message.reply_text('Choose your class', reply_markup=reply_markup)
 
 def listchar(update, context):
