@@ -10,7 +10,7 @@ from uuid import uuid4
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler
 
-from definitions import CLASSES_BUTTONS, RACES_BUTTONS, ALIGNMENT_BUTTONS
+from definitions import CLASSES_BUTTONS, RACES_BUTTONS, ALIGNMENT_BUTTONS, CONFIRM
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -21,10 +21,13 @@ logger = logging.getLogger(__name__)
 with open("chardb.json") as f:
     CHARACTERS = json.load(f)
 
+default_values = [ 15, 14, 13, 12, 10, 8 ]
+
 pg_base = {
     "name": "",
     "class": "",
     "race": "",
+    "alignment": "",
     "attributes": {
         "str": 0,
         "dex": 0,
@@ -36,8 +39,19 @@ pg_base = {
     "level": 1,
     "experience": 0,
     "skills" : "LATER",
+    "FIELDNUMBER": 0,
     "NEXTFIELD" : "name",
     "DONE": False
+    }
+
+FIELDS = [ "class", "race", "alignment" ]
+
+MENUS = {
+    "confirm": CONFIRM,
+    "class": CLASSES_BUTTONS,
+    "race": RACES_BUTTONS,
+    "alignment": ALIGNMENT_BUTTONS,
+    "attributes": None
     }
 
 # Define a few command handlers. These usually take the two arguments update and
@@ -53,9 +67,13 @@ def help(update, context):
 def roll(update,context):
     if len(context.args)<1 :
         num= random.randint(1,20)
-    else: 
+    else:
         num= random.randint(1,int(context.args[0]))
-    update.message.reply_text(f"You rolled {num}") 
+    update.message.reply_text(f"You rolled {num}")
+
+def display(query, field):
+    reply_markup = InlineKeyboardMarkup(MENUS[field])
+    query.edit_message_text(text="PLACEHOLDER", reply_markup=reply_markup)
 
 def button(update, context):
     query = update.callback_query
@@ -63,28 +81,26 @@ def button(update, context):
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     uid = update.effective_user['id']
-    if context.user_data != {}:
-        context.user_data[context.user_data["NEXTFIELD"]] = query.data
-        if context.user_data["NEXTFIELD"] == "class":
-            reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
-            context.user_data["NEXTFIELD"] = "race"
-            query.edit_message_text(text="Choose your race", reply_markup=reply_markup)
-        elif context.user_data["NEXTFIELD"] == "race":
-            reply_markup = InlineKeyboardMarkup(ALIGNMENT_BUTTONS)
-            context.user_data["NEXTFIELD"] = "alignment"
-            query.edit_message_text(text="Choose your Alignment", reply_markup=reply_markup)
-        elif context.user_data["NEXTFIELD"] == "alignment":
-            context.user_data["DONE"] = True
-            query.edit_message_text(text="Character created")
-    if context.user_data["DONE"]:
-        if uid in CHARACTERS:
-            CHARACTERS[uid][context.user_data['name']] = context.user_data
-        else:
-            CHARACTERS[uid] = { context.user_data['name'] : context.user_data }
-        with open("chardb.json", "w") as f:
-            json.dump(CHARACTERS, f)
-        context.user_data.clear()
     query.answer()
+    if context.user_data != {}:
+        if query.data == "Confirm":
+            context.user_data["FIELDNUMBER"] +=1
+        elif query.data == "Back":
+            pass
+        else:
+            context.user_data[FIELDS[context.user_data["FIELDNUMBER"]]] = query.data
+            return display(query, "confirm")
+        if context.user_data["FIELDNUMBER"] >= len(FIELDS):
+            query.edit_message_text(text="Character created")
+            if uid in CHARACTERS:
+                CHARACTERS[uid][context.user_data['name']] = context.user_data
+            else:
+                CHARACTERS[uid] = { context.user_data['name'] : context.user_data }
+            with open("chardb.json", "w") as f:
+                json.dump(CHARACTERS, f)
+            context.user_data.clear()
+        else:
+            display(query, FIELDS[context.user_data["FIELDNUMBER"]])
 
 def makepg(update, context):
     """Makes a new pg"""
@@ -96,7 +112,7 @@ def makepg(update, context):
         return update.message.reply_text('[!] You are already making a character!')
     context.user_data.update(pg_base)
     context.user_data['name'] = name
-    context.user_data['NEXTFIELD'] = "class"
+    context.user_data['FIELDNUMBER'] = 0
     reply_markup = InlineKeyboardMarkup(CLASSES_BUTTONS)
     update.message.reply_text('Choose your class', reply_markup=reply_markup)
 
@@ -155,7 +171,7 @@ def main():
     dp.add_handler(CommandHandler("roll",roll))
     dp.add_handler(CommandHandler("help",help))
     dp.add_handler(CommandHandler("listchar", listchar))
-    updater.dispatcher.add_handler(CallbackQueryHandler(button))
+    dp.add_handler(CallbackQueryHandler(button))
     dp.add_handler(CommandHandler("interactive",interactive))
     dp.add_handler(CommandHandler("stop_interactive",stop_interactive))
 

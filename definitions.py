@@ -1,6 +1,9 @@
 # This is just a lot of long shit
 from telegram import InlineKeyboardButton
 
+CONFIRM = [[InlineKeyboardButton("Confirm", callback_data='Confirm'),
+            InlineKeyboardButton("Back", callback_data='Back')]]
+
 CLASSES_BUTTONS = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
               InlineKeyboardButton("Bardo", callback_data='Bardo'),
               InlineKeyboardButton("Chierico", callback_data='Chierico'),
@@ -17,9 +20,9 @@ RACES_BUTTONS = [[InlineKeyboardButton("Umano", callback_data="Umano"),
         InlineKeyboardButton("Elfo", callback_data="Elfo"),
         InlineKeyboardButton("Nano", callback_data="Nano"),
         InlineKeyboardButton("Halfling", callback_data="Halfling"),
-        InlineKeyboardButton("Mezzorco", callback_data="Mezzorco")],
+        InlineKeyboardButton("Gnomo", callback_data="Gnomo")],
         [InlineKeyboardButton("Mezzelfo", callback_data="Mezzelfo"),
-        InlineKeyboardButton("Gnomo", callback_data="Gnomo"),
+        InlineKeyboardButton("Mezzorco", callback_data="Mezzorco"),
         InlineKeyboardButton("Tiefling", callback_data="Tiefling"),
         InlineKeyboardButton("Dragonborn", callback_data="Dragonborn")]]
 
