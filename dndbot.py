@@ -46,6 +46,18 @@ def fact(update, context):
     except:
         update.message.reply_text("Could not fetch a random fact")
 
+def makepg(update, context):
+    """Makes a new pg"""
+    name = context.args[0]
+    pg = {
+            "name": name,
+            "class": "UNKNOWN",
+            "gay": "100%"
+    }
+    with open(f"{name}.json", "w") as f:
+        json.dump(pg, f)
+    update.message.reply_text(f"Made a new char named {name}")
+
 def classes(update,context):
     """Gets list of classes"""
     print(f"<@{update.effective_user['username']}> {update.message.text}")
