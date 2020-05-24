@@ -9,7 +9,7 @@ from uuid import uuid4
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler
 
-from definitions import CLASSES_BUTTONS, RACES_BUTTONS
+from definitions import CLASSES_BUTTONS, RACES_BUTTONS, ALIGNMENT_BUTTONS
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -17,7 +17,27 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-CHARACTERS = {} # nested dict! First key is user_id, second key is character name
+with open("chardb.json") as f:
+    CHARACTERS = json.load(f)
+
+pg_base = {
+    "name": , "",
+    "class": "",
+    "race": "",
+    "attributes": {
+        "str": 0,
+        "dex": 0,
+        "con": 0,
+        "int": 0,
+        "wis": 0,
+        "cha": 0
+        },
+    "level": 1,
+    "experience": 0,
+    "skills" : "LATER",
+    "NEXTFIELD" : "name",
+    "DONE": False
+    }
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
@@ -35,24 +55,29 @@ def button(update, context):
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     uid = update.effective_user['id']
-    if uid in context.bot_data:
-        if "race" in context.bot_data[uid]:
-            context.bot_data[uid]["race"] = query.data
-            query.edit_message_text(text="Chosen race: {}".format(query.data))
-            if uid in CHARACTERS:
-                CHARACTERS[uid][context.bot_data[uid]['name']] = context.bot_data[uid]
-            else:
-                CHARACTERS[uid] = { context.bot_data[uid]['name'] : context.bot_data[uid] }
-            with open("chardb.json", "w") as f:
-                json.dump(CHARACTERS, f)
-            context.bot_data.pop(uid)
-            query.message.reply_text("Character created succesfully")
-        elif "class" in context.bot_data[uid]:
-            context.bot_data[uid]["class"] = query.data
-            context.bot_data[uid]["race"] = ""
-            query.edit_message_text(text="Chosen class: {}".format(query.data))
+    if context.user_data != {}:
+        context.user_data[context.user_data["NEXTFIELD"]] = query.data
+        if context.user_data["NEXTFIELD"] == "class":
             reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
-            query.message.reply_text('Choose your race', reply_markup=reply_markup)
+            context.user_data["NEXTFIELD"] = "race"
+            query.edit_message_text(text="Choose your race", reply_markup=reply_markup)
+        elif context.user_data["NEXTFIELD"] == "race":
+            reply_markup = InlineKeyboardMarkups(ALIGNMENT_BUTTONS)
+            context.user_data["NEXTFIELD"] = "alignment"
+            query.edit_message_text(text="Choose your Alignment", reply_markup=reply_markup)
+        elif context.user_data["NEXTFIELD"] == "alignment":
+            query.edit_message_text(text="Character created")
+            context.user_data["DONE"] = True
+        elif "class" in context.user_data:
+    if context.user_data["DONE"]:
+        if uid in CHARACTERS:
+            CHARACTERS[uid][context.user_data['name']] = context.user_data
+        else:
+            CHARACTERS[uid] = { context.user_data['name'] : context.user_data }
+        with open("chardb.json", "w") as f:
+            json.dump(CHARACTERS, f)
+        context.user_data = {}
+        query.message.reply_text("Character created succesfully")
     query.answer()
 
 def makepg(update, context):
@@ -60,19 +85,17 @@ def makepg(update, context):
     if len(context.args) < 1:
         return update.message.reply_text('[!] You need to provide a character name')
     name = context.args[0]
-    pg = {
-            "name": name,
-            "class": "",
-            "gay": "100%"
-    }
     uid = update.effective_user['id']
-    if uid in context.bot_data:
+    if context.user_data != {}:
         return update.message.reply_text('[!] You are already making a character!')
-    context.bot_data[uid] = pg
+    context.user_data = pg_base
+    context.user_data['name'] = name
+    context.user_data['NEXTFIELD'] = "class"
     reply_markup = InlineKeyboardMarkup(CLASSES_BUTTONS)
     update.message.reply_text('Choose your class', reply_markup=reply_markup)
 
 def listchar(update, context):
+    # TODO print all fields
     text = ""
     for char in CHARACTERS[update.effective_user['id']].values():
         text += f"{char['name']} ({char['race']} {char['class']}) : {char['gay']} homosexual\n"
@@ -107,8 +130,6 @@ def main():
     # Load config
     with open("config.json") as f:
         config = json.load(f)
-    with open("chardb.json") as f:
-        CHARACTERS = json.load(f)
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
