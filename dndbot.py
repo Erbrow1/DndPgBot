@@ -7,8 +7,8 @@ import logging
 import requests
 
 from uuid import uuid4
-import telegram
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler
 
 
 # Enable logging
@@ -25,23 +25,21 @@ def start(update, context):
     print(f"<@{update.effective_user['username']}> {update.message.text}")
     update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
 
+def inline(update, context):
+    keyboard = [[InlineKeyboardButton("Guerriero", callback_data='gay'),
+                 InlineKeyboardButton("Stregone", callback_data='mago triste')],
+                [InlineKeyboardButton("Ranger", callback_data='mado e` uno scherzo?')]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    update.message.reply_text('Please choose:', reply_markup=reply_markup)
 
-def help(update, context):
-    """Send a message when the command /help is issued."""
-    print(f"<@{update.effective_user['username']}> {update.message.text}")
-    update.message.reply_text('Help!')
+def button(update, context):
+    query = update.callback_query
 
+    # CallbackQueries need to be answered, even if no notification to the user is needed
+    # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
+    query.answer()
 
-
-def fact(update, context):
-    """Gets a random fact"""
-    print(f"<@{update.effective_user['username']}> {update.message.text}")
-    try:
-        r = requests.get("https://uselessfacts.jsph.pl/random.json", timeout=5)
-        data = r.json()
-        update.message.reply_text(f"{data['text']} ({data['source']})")
-    except:
-        update.message.reply_text("Could not fetch a random fact")
+    query.edit_message_text(text="Selected option: {}".format(query.data))
 
 def makepg(update, context):
     """Makes a new pg"""
@@ -106,11 +104,11 @@ def main():
 
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("fact", fact))
     dp.add_handler(CommandHandler("classes",classes))
     dp.add_handler(CommandHandler("me",me))
     dp.add_handler(CommandHandler("makepg",makepg))
+    updater.dispatcher.add_handler(CommandHandler('inline', inline))
+    updater.dispatcher.add_handler(CallbackQueryHandler(button))
     dp.add_handler(CommandHandler("interactive",interactive))
     dp.add_handler(CommandHandler("stop_interactive",stop_interactive))
 
