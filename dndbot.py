@@ -59,10 +59,10 @@ MENUS = {
 def start(update, context):
     """Send a message when the command /start is issued."""
     print(f"<@{update.effective_user['username']}> {update.message.text}")
-    update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
+    update.message.reply_text(f"Hey {update.effective_user['username']} \nWelcome to TESTANVEDICHEBOT!!\n Here you can create your DnD Characters. Enjoy it!!")
 
 def help(update, context):
-    update.message.reply_text('Lista comandi:\n/help (mostra questa lista)\n/me (informazioni utente)\n/makepg \"NomePg\" (Crea nuovo personaggio)\n/roll \"Number\" (estrae un numero casuale tra 1 e Number)')
+    update.message.reply_text('Command List:\n/help (Show this list)\n/me (User informations)\n/makepg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)')
 
 def roll(update,context):
     if len(context.args)<1 :
