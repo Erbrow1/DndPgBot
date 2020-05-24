@@ -36,3 +36,10 @@ ALIGNMENT_BUTTONS = [[InlineKeyboardButton("Lawful Good", callback_data="Lawful 
         [InlineKeyboardButton("Lawful Evil", callback_data="Lawful Evil"),
         InlineKeyboardButton("Neutral Evil", callback_data="Neutral Evil"),
         InlineKeyboardButton("Neutral Evil", callback_data="Neutral Evil")]]
+
+def ATTRIBUTE_MENU(attr):
+    ATTRIBUTE_BUTTONS = [[]]
+    for val in attr:
+        ATTRIBUTE_BUTTONS[0].append(InlineKeyboardButton(val, callback_data=val))
+    return ATTRIBUTE_BUTTONS
+
