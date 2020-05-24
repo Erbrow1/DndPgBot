@@ -3,6 +3,7 @@
 import json
 import logging
 import requests
+import traceback
 
 from uuid import uuid4
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
@@ -36,16 +37,17 @@ def button(update, context):
             context.bot_data[uid]["race"] = query.data
             query.edit_message_text(text="Chosen race: {}".format(query.data))
             if uid in CHARACTERS:
-                CHARACTERS[uid][pg['name']] = pg
+                CHARACTERS[uid][context.bot_data[uid]['name']] = context.bot_data[uid]
             else:
-                CHARACTERS[uid] = { pg['name'] : pg }
+                CHARACTERS[uid] = { context.bot_data[uid]['name'] : context.bot_data[uid] }
             context.bot_data.pop(uid)
+            query.message.reply_text("Character created succesfully")
         elif "class" in context.bot_data[uid]:
             context.bot_data[uid]["class"] = query.data
             context.bot_data[uid]["race"] = ""
             query.edit_message_text(text="Chosen class: {}".format(query.data))
             reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
-            query.reply_text('Choose your race', reply_markup=reply_markup)
+            query.message.reply_text('Choose your race', reply_markup=reply_markup)
     query.answer()
 
 def makepg(update, context):
@@ -91,8 +93,8 @@ def me(update,context):
 
 def error(update, context):
     """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
-
+    # logger.warning('Update "%s" caused error "%s"', update, context.error)
+    traceback.print_exc()
 
 def main():
     """Start the bot."""
