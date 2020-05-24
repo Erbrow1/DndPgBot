@@ -32,14 +32,20 @@ def button(update, context):
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     uid = update.effective_user['id']
     if uid in context.bot_data:
-        pg = context.bot_data[uid]
-        pg["class"] = query.data
-        if uid in CHARACTERS:
-            CHARACTERS[uid][pg['name']] = pg
-        else:
-            CHARACTERS[uid] = { pg['name'] : pg }
-        context.bot_data.pop(uid)
-        query.edit_message_text(text="Chosen class: {}".format(query.data))
+        if "race" in context.bot_data[uid]:
+            context.bot_data[uid]["race"] = query.data
+            query.edit_message_text(text="Chosen race: {}".format(query.data))
+            if uid in CHARACTERS:
+                CHARACTERS[uid][pg['name']] = pg
+            else:
+                CHARACTERS[uid] = { pg['name'] : pg }
+            context.bot_data.pop(uid)
+        elif "class" in context.bot_data[uid]:
+            context.bot_data[uid]["class"] = query.data
+            context.bot_data[uid]["race"] = ""
+            query.edit_message_text(text="Chosen class: {}".format(query.data))
+            reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
+            update.message.reply_text('Choose your race', reply_markup=reply_markup)
     query.answer()
 
 def makepg(update, context):
@@ -49,7 +55,7 @@ def makepg(update, context):
     name = context.args[0]
     pg = {
             "name": name,
-            "class": "UNKNOWN",
+            "class": "",
             "gay": "100%"
     }
     uid = update.effective_user['id']
@@ -62,7 +68,7 @@ def makepg(update, context):
 def listchar(update, context):
     text = ""
     for char in CHARACTERS[update.effective_user['id']].values():
-        text += f"{char['name']} ({char['class']}) : {char['gay']} homosexual\n"
+        text += f"{char['name']} ({char['race']} {char['class']}) : {char['gay']} homosexual\n"
     update.message.reply_text(text)
 
 def interactive(update, context):
