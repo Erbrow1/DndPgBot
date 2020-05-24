@@ -75,7 +75,7 @@ def button(update, context):
             CHARACTERS[uid] = { context.user_data['name'] : context.user_data }
         with open("chardb.json", "w") as f:
             json.dump(CHARACTERS, f)
-        context.user_data = {}
+        context.user_data.clear()
         query.message.reply_text("Character created succesfully")
     query.answer()
 
@@ -87,7 +87,7 @@ def makepg(update, context):
     uid = update.effective_user['id']
     if context.user_data != {}:
         return update.message.reply_text('[!] You are already making a character!')
-    context.user_data = pg_base
+    context.user_data.update(pg_base)
     context.user_data['name'] = name
     context.user_data['NEXTFIELD'] = "class"
     reply_markup = InlineKeyboardMarkup(CLASSES_BUTTONS)
