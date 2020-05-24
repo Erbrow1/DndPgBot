@@ -94,15 +94,10 @@ def display(query, context, field, value=None):
         txt = DESCRIPTIONS[value]
     else:
         txt = "TODO"
-<<<<<<< HEAD
     if FIELDS[context.user_data["FIELDNUMBER"]] == "attributes" and field != "confirm":
         reply_markup = InlineKeyboardMarkup(ATTRIBUTE_MENU(context.user_data["UNASSIGNED_ATTRS"]))
     else:
         reply_markup = InlineKeyboardMarkup(MENUS[field])
-=======
-    reply_markup = InlineKeyboardMarkup(MENUS[field])
-
->>>>>>> c600a4ccd8b3629b5c565f2afbf385f7af642a56
     query.edit_message_text(text=txt, reply_markup=reply_markup)
 
 def button(update, context):
