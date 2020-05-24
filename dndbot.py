@@ -62,7 +62,7 @@ def button(update, context):
             context.user_data["NEXTFIELD"] = "race"
             query.edit_message_text(text="Choose your race", reply_markup=reply_markup)
         elif context.user_data["NEXTFIELD"] == "race":
-            reply_markup = InlineKeyboardMarkups(ALIGNMENT_BUTTONS)
+            reply_markup = InlineKeyboardMarkup(ALIGNMENT_BUTTONS)
             context.user_data["NEXTFIELD"] = "alignment"
             query.edit_message_text(text="Choose your Alignment", reply_markup=reply_markup)
         elif context.user_data["NEXTFIELD"] == "alignment":
