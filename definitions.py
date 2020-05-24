@@ -1,4 +1,5 @@
 # This is just a lot of long shit
+from telegram import InlineKeyboardButton
 
 CLASSES_BUTTONS = [[InlineKeyboardButton("Barbaro", callback_data='Barbaro'),
               InlineKeyboardButton("Bardo", callback_data='Bardo'),
