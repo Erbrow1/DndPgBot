@@ -1,4 +1,4 @@
-# This program is dedicated to the public domain under the CC0 license
+#!/usr/bin/env python
 
 import json
 import logging
@@ -77,7 +77,7 @@ def makepg(update, context):
 
 def listchar(update, context):
     text = ""
-    for char in CHARACTERS[update.effective_user['id']]:
+    for char in CHARACTERS[update.effective_user['id']].values():
         text += f"{char['name']} ({char['class']}) : {char['gay']} homosexual\n"
     update.message.reply_text(text)
 
