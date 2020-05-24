@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # This program is dedicated to the public domain under the CC0 license
 
 import json
@@ -81,7 +80,6 @@ def listchar(update, context):
     for char in CHARACTERS[update.effective_user['id']]:
         text += f"{char['name']} ({char['class']}) : {char['gay']} homosexual\n"
     update.message.reply_text(text)
-
 
 def classes(update,context):
     """Gets list of classes"""
