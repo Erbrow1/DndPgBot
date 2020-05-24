@@ -21,7 +21,7 @@ with open("chardb.json") as f:
     CHARACTERS = json.load(f)
 
 pg_base = {
-    "name": , "",
+    "name": "",
     "class": "",
     "race": "",
     "attributes": {
