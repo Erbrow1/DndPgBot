@@ -27,8 +27,7 @@ def start(update, context):
     update.message.reply_text('Benvenuto nel bot che per adesso fa solo vedere la lista delle classi disponibili')
 
 def help(update, context):
-    update.message.reply_text('Lista comandi:\n/help (mostra questa lista)\n/me (informazioni utente)\n/makepg "NomePg" 
-        (Crea nuovo personaggio)')
+    update.message.reply_text('Lista comandi:\n/help (mostra questa lista)\n/me (informazioni utente)\n/makepg \"NomePg\" (Crea nuovo personaggio)')
 
 def button(update, context):
     query = update.callback_query
