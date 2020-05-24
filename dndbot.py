@@ -5,6 +5,7 @@ import logging
 import requests
 import traceback
 import random
+import copy
 
 from uuid import uuid4
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
@@ -17,9 +18,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-
-with open("chardb.json") as f:
-    CHARACTERS = json.load(f)
 
 default_values = [ 15, 14, 13, 12, 10, 8 ]
 
@@ -54,11 +52,16 @@ MENUS = {
     "attributes": None
     }
 
+DESCRIPTIONS = {
+    "Barbarian": "ooga booga break bones",
+    "Wizard": "Skiidaadle Skidoodle your dick is now a noodle",
+    "Neutral": "Literally wanted to play edgy evil character but party said NO"
+    }
+
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    print(f"<@{update.effective_user['username']}> {update.message.text}")
     update.message.reply_text(f"Hey {update.effective_user['username']} \nWelcome to TESTANVEDICHEBOT!!\n Here you can create your DnD Characters. Enjoy it!!")
 
 def help(update, context):
@@ -71,9 +74,15 @@ def roll(update,context):
         num= random.randint(1,int(context.args[0]))
     update.message.reply_text(f"You rolled {num}")
 
-def display(query, field):
+def display(query, field, value=None):
+    if value is None:
+        txt = f"Choose your {field}"
+    elif value in DESCRIPTIONS:
+        txt = DESCRIPTIONS[value]
+    else:
+        txt = "TODO"
     reply_markup = InlineKeyboardMarkup(MENUS[field])
-    query.edit_message_text(text="PLACEHOLDER", reply_markup=reply_markup)
+    query.edit_message_text(text=txt, reply_markup=reply_markup)
 
 def button(update, context):
     query = update.callback_query
@@ -89,15 +98,13 @@ def button(update, context):
             pass
         else:
             context.user_data[FIELDS[context.user_data["FIELDNUMBER"]]] = query.data
-            return display(query, "confirm")
+            return display(query, "confirm", query.data)
         if context.user_data["FIELDNUMBER"] >= len(FIELDS):
             query.edit_message_text(text="Character created")
-            if uid in CHARACTERS:
-                CHARACTERS[uid][context.user_data['name']] = context.user_data
+            if uid in context.bot_data:
+                context.bot_data[uid][context.user_data['name']] = copy.deepcopy(context.user_data)
             else:
-                CHARACTERS[uid] = { context.user_data['name'] : context.user_data }
-            with open("chardb.json", "w") as f:
-                json.dump(CHARACTERS, f)
+                context.bot_data[uid] = { context.user_data['name'] : copy.deepcopy(context.user_data) }
             context.user_data.clear()
         else:
             display(query, FIELDS[context.user_data["FIELDNUMBER"]])
@@ -119,11 +126,10 @@ def makepg(update, context):
 def listchar(update, context):
     # TODO print all fields
     text = ""
-    if update.effective_user['id'] not in CHARACTERS:
+    if update.effective_user['id'] not in context.bot_data:
         return update.message.reply_text("[!] You have no characters")
-    for char in CHARACTERS[update.effective_user['id']].values():
-        print(char)
-        # text += f"{char['name']} ({char['race']} {char['class']})\n"
+    for char in context.bot_data[update.effective_user['id']].values():
+        text += f"{char['name']} ({char['race']} {char['class']})\n"
     update.message.reply_text(text)
 
 def interactive(update, context):
@@ -140,7 +146,6 @@ def stop_interactive(update, context):
 
 def me(update,context):
     """Self informations"""
-    print(f"<@{update.effective_user['username']}> {update.message.text}")
     user = update.effective_user
     update.message.reply_text(f"Benvenuto {user['username']}\nNome : {user['first_name']}\nCognome: {user['last_name']}\nID: {user['id']} ")
 
@@ -160,9 +165,11 @@ def main():
     # Post version 12 this will no longer be necessary
     updater = Updater(config["TOKEN"], use_context=True)
 
-
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
+
+    with open("chardb.json") as f:
+        dp.bot_data.update(json.load(f))
 
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
@@ -186,6 +193,8 @@ def main():
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.
     updater.idle()
+    with open("chardb.json", "w") as f:
+        json.dump(dp.bot_data, f)
     print("[x] Stopping bot")
 
 
