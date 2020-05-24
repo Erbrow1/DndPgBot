@@ -52,10 +52,13 @@ MENUS = {
     }
 
 DESCRIPTIONS = {
-    "Barbarian": "ooga booga break bones",
-    "Wizard": "Skiidaadle Skidoodle your dick is now a noodle",
-    "Neutral": "Literally wanted to play edgy evil character but party said NO",
-    "areyousure": "Do you want to confirm your attributes? Going back will start attribute assignment over"
+    "areyousure": "Do you want to confirm your attributes? Going back will start attribute assignment over",
+    "Barbarian" : ("https://i.pinimg.com/originals/d3/e1/4b/d3e14b7c318ff2ddb4fe25fda8757d4f.jpg\nTo a barbarian, though, "
+                   "civilization is no virtue, but a sign of weakness. The strong embrace their animal nature—keen instincts, "
+                   "primal physicality, and ferocious rage. ... Barbarians come alive in the chaos of combat.\n They can "
+                   "enter a berserk state where rage takes over, giving them superhuman strength and resilience."),
+    "Wizard": "Skiidaadle Skidoodle your dick is now a noodle,hehehehe",
+    "Neutral": "Literally wanted to play edgy evil character but party said NO"
     }
 
 # Define a few command handlers. These usually take the two arguments update and
@@ -86,10 +89,15 @@ def display(query, context, field, value=None):
         txt = DESCRIPTIONS[value]
     else:
         txt = "TODO"
+<<<<<<< HEAD
     if FIELDS[context.user_data["FIELDNUMBER"]] == "attributes" and field != "confirm":
         reply_markup = InlineKeyboardMarkup(ATTRIBUTE_MENU(context.user_data["UNASSIGNED_ATTRS"]))
     else:
         reply_markup = InlineKeyboardMarkup(MENUS[field])
+=======
+    reply_markup = InlineKeyboardMarkup(MENUS[field])
+
+>>>>>>> c600a4ccd8b3629b5c565f2afbf385f7af642a56
     query.edit_message_text(text=txt, reply_markup=reply_markup)
 
 def button(update, context):
