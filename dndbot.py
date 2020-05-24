@@ -66,8 +66,8 @@ def button(update, context):
             context.user_data["NEXTFIELD"] = "alignment"
             query.edit_message_text(text="Choose your Alignment", reply_markup=reply_markup)
         elif context.user_data["NEXTFIELD"] == "alignment":
-            query.edit_message_text(text="Character created")
             context.user_data["DONE"] = True
+            query.edit_message_text(text="Character created")
     if context.user_data["DONE"]:
         if uid in CHARACTERS:
             CHARACTERS[uid][context.user_data['name']] = context.user_data
@@ -76,7 +76,6 @@ def button(update, context):
         with open("chardb.json", "w") as f:
             json.dump(CHARACTERS, f)
         context.user_data.clear()
-        query.message.reply_text("Character created succesfully")
     query.answer()
 
 def makepg(update, context):
@@ -96,8 +95,11 @@ def makepg(update, context):
 def listchar(update, context):
     # TODO print all fields
     text = ""
+    if update.effective_user['id'] not in CHARACTERS:
+        return update.message.reply_text("[!] You have no characters")
     for char in CHARACTERS[update.effective_user['id']].values():
-        text += f"{char['name']} ({char['race']} {char['class']}) : {char['gay']} homosexual\n"
+        print(char)
+        # text += f"{char['name']} ({char['race']} {char['class']})\n"
     update.message.reply_text(text)
 
 def interactive(update, context):
