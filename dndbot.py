@@ -137,7 +137,7 @@ def main():
     dp.add_handler(CommandHandler("classes",classes))
     dp.add_handler(CommandHandler("me",me))
     dp.add_handler(CommandHandler("makepg",makepg))
-    updater.dispatcher.add_handler(CommandHandler('inline', inline))
+    dp.add_handler(CommandHandler("listchar", listchar))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
     dp.add_handler(CommandHandler("interactive",interactive))
     dp.add_handler(CommandHandler("stop_interactive",stop_interactive))
