@@ -37,6 +37,11 @@ pg_base = {
     "level": 1,
     "experience": 0,
     "skills" : "LATER",
+    "proficiencies": "LATER",
+    "feats": "LATER",
+    "spells": "OMGPLZNEVER",
+    "gear": "Starting Gear",
+    "background" : "Gay",
     "FIELDNUMBER": 0,
     "UNASSIGNED_ATTRS": ["str", "dex", "con", "int", "wis", "cha"],
     "ATTR_VALUES": [ 12, 13, 10, 8, 14, 15 ]
