@@ -69,6 +69,18 @@ def classes(update,context):
 
     update.message.reply_text(message)
 
+def interactive(update, context):
+    custom_keyboard = [['top-left', 'top-right'],
+                   ['bottom-left', 'bottom-right']]
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
+    context.bot.send_message(chat_id=update.message.chat_id,
+                 text="Custom Keyboard Test",
+                 reply_markup=reply_markup)
+
+def stop_interactive(update, context):
+    reply_markup = telegram.ReplyKeyboardRemove()
+    context.bot.send_message(chat_id=update.message.chat_id, text="I'm back.", reply_markup=reply_markup)
+
 def me(update,context):
     """Self informations"""
     print(f"<@{update.effective_user['username']}> {update.message.text}")
@@ -102,6 +114,8 @@ def main():
     dp.add_handler(CommandHandler("classes",classes))
     dp.add_handler(CommandHandler("me",me))
     dp.add_handler(CommandHandler("makepg",makepg))
+    dp.add_handler(CommandHandler("interactive",interactive))
+    dp.add_handler(CommandHandler("stop_interactive",stop_interactive))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
