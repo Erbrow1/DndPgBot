@@ -8,7 +8,7 @@ import random
 import copy
 
 from uuid import uuid4
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler
 
 from definitions import CLASSES_BUTTONS, RACES_BUTTONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
@@ -78,7 +78,7 @@ def start(update, context):
     """Send a message when the command /start is issued."""
     custom_keyboard = [['/makepg', '/roll'],
                    ['/help']]
-    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
+    reply_markup = ReplyKeyboardMarkup(custom_keyboard)
     context.bot.send_message(chat_id=update.message.chat_id,
                  text="Welcome to an Interactive Character creation! Press /makepg to start",
                  reply_markup=reply_markup)
@@ -169,7 +169,7 @@ def listchar(update, context):
     update.message.reply_text(text)
 
 def stop(update, context):
-    reply_markup = telegram.ReplyKeyboardRemove()
+    reply_markup = ReplyKeyboardRemove()
     context.bot.send_message(chat_id=update.message.chat_id, text="Disabled buttons", reply_markup=reply_markup)
 
 def me(update,context):
