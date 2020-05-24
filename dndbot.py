@@ -101,6 +101,7 @@ def main():
     dp.add_handler(CommandHandler("fact", fact))
     dp.add_handler(CommandHandler("classes",classes))
     dp.add_handler(CommandHandler("me",me))
+    dp.add_handler(CommandHandler("makepg",makepg))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
