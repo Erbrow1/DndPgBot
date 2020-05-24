@@ -168,8 +168,6 @@ def listchar(update, context):
         text += f"{char['name']} ({char['race']} {char['class']})\n"
     update.message.reply_text(text)
 
-def interactive(update, context):
-
 def stop(update, context):
     reply_markup = telegram.ReplyKeyboardRemove()
     context.bot.send_message(chat_id=update.message.chat_id, text="Disabled buttons", reply_markup=reply_markup)
