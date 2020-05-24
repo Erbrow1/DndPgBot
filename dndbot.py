@@ -7,6 +7,7 @@ import logging
 import requests
 
 from uuid import uuid4
+import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
