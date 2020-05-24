@@ -76,7 +76,12 @@ DESCRIPTIONS = {
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text(f"Hey {update.effective_user['username']} \nWelcome to TESTANVEDICHEBOT!!\n Here you can create your DnD Characters. Enjoy it!!")
+    custom_keyboard = [['/makepg', '/roll'],
+                   ['/help']]
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
+    context.bot.send_message(chat_id=update.message.chat_id,
+                 text="Welcome to an Interactive Character creation! Press /makepg to start",
+                 reply_markup=reply_markup)
 
 def help(update, context):
     update.message.reply_text('Command List:\n/help (Show this list)\n/me (User informations)\n/makepg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)')
@@ -164,16 +169,10 @@ def listchar(update, context):
     update.message.reply_text(text)
 
 def interactive(update, context):
-    custom_keyboard = [['sei puttana', 'sei gay'],
-                   ['sei op', 'sei ok']]
-    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
-    context.bot.send_message(chat_id=update.message.chat_id,
-                 text="Custom Keyboard Test",
-                 reply_markup=reply_markup)
 
-def stop_interactive(update, context):
+def stop(update, context):
     reply_markup = telegram.ReplyKeyboardRemove()
-    context.bot.send_message(chat_id=update.message.chat_id, text="I'm back.", reply_markup=reply_markup)
+    context.bot.send_message(chat_id=update.message.chat_id, text="Disabled buttons", reply_markup=reply_markup)
 
 def me(update,context):
     """Self informations"""
@@ -210,8 +209,7 @@ def main():
     dp.add_handler(CommandHandler("help",help))
     dp.add_handler(CommandHandler("listchar", listchar))
     dp.add_handler(CallbackQueryHandler(button))
-    dp.add_handler(CommandHandler("interactive",interactive))
-    dp.add_handler(CommandHandler("stop_interactive",stop_interactive))
+    dp.add_handler(CommandHandler("stop",stop))
 
 
     # log all errors
