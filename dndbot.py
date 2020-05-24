@@ -68,7 +68,6 @@ def button(update, context):
         elif context.user_data["NEXTFIELD"] == "alignment":
             query.edit_message_text(text="Character created")
             context.user_data["DONE"] = True
-        elif "class" in context.user_data:
     if context.user_data["DONE"]:
         if uid in CHARACTERS:
             CHARACTERS[uid][context.user_data['name']] = context.user_data
