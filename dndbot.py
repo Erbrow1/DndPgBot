@@ -57,10 +57,10 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt=f"This is a Character Sheet of <b style=\"background-color:DodgerBlue;\">{pg['name']}</b>"
+    txt=f"This is a Character Sheet of '{pg['name']}'"
     context.bot.send_message(chat_id=update.message.chat_id, 
                  text=txt, 
-                 parse_mode='HTML')
+                 parse_mode='Markdown')
 def error(update, context):
     """Log Errors caused by Updates."""
     # logger.warning('Update "%s" caused error "%s"', update, context.error)
