@@ -57,10 +57,11 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt=f"This is a Character Sheet of '{pg['name']}'"
+    txt=f"This is a Character Sheet of {pg['name']}\n* an asterisk starts an unordered list\n* and this is another item in the list\n+ or you can also use the + character\n- or the - character\nTo start an ordered list, write this:\n\n1. this starts a list *with* numbers\n+  this will show as number \"2\"\n*  this will show as number \"3.\"\n9. any number, +, -, or * will keep the list going.\n   * just indent by 4 spaces (or tab) to make a sub-list\n     1. keep indenting for more sub lists\n  * here i'm back to the second level\nTo start a check list, write this:\n    - [ ] this is not checked\n    - [ ] this is too\n    - [x] but this is checked"
     context.bot.send_message(chat_id=update.message.chat_id, 
-                 text=txt, 
-                 parse_mode='Markdown')
+                            text=txt, 
+                            parse_mode='Markdown')
+                            
 def error(update, context):
     """Log Errors caused by Updates."""
     # logger.warning('Update "%s" caused error "%s"', update, context.error)
