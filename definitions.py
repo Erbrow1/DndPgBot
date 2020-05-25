@@ -96,37 +96,33 @@ class Race:
         def __init__(self):
                 self.name= "nome"
                 self.subrace= "subrace"
-                self.attr_mod.str=0
-                self.attr_mod.dex=0
-                self.attr_mod.con=0
-                self.attr_mod.int=0
-                self.attr_mod.wis=0
-                self.attr_mod.cha=0
-        def set_race(self,race,subrace):
-                self.name= race
-                self.subrace= subrace
-                switch (race) {
-                        case "Dwarf":   self.attr_mod.con =2
-                                        if self.subrace == "Hill":
-                                                self.attr_mod.wis = 1
-                                        elif self.subrace == "Mountain":
-                                                self.attr_mod.str= 2
-                        case "Elf":     self.attr_mod.dex = 2
-                                        if self.subrace == "Drow":
-                                                self.attr_mod.cha =1 
-                                        elif self.subrace == "High Elf":
-                                                self.attr_mod.int =1
-                                        elif self.subrace == "Wood Elf":
-                                                self.attr_mod.wis = 1
-                        case "Gnome":   self.attr_mod.int = 2
-                                        if  self.subrace == "Deep":
-                                                self.attr_mod.dex=1
-                                        elif self.subrace == "Rock":
-                                                sel.attr_mod.con =1
-                        case "Half-Elf":
-                        case "Halfling":
-                        case "Half-Orc":
-                        case "Human":
-                        case "Tiefling":
-                        default :
+                self.attr_mod = {
+                        "str" : 0,
+                        "dex" : 0,
+                        "con" : 0,
+                        "int" : 0,
+                        "wis" : 0,
+                        "cha" : 0
                 }
+        
+        def switch (self,name):
+                        switcher = {
+                                "Dwarf": Dwarf,
+                                "Elf" : Elf
+                        }
+                        func= switcher.get(self, lambda : "invalid race")
+                        return func()
+        
+        def set_race(self, name, subrace):
+                self.name = name
+                self.subrace = subrace
+                Switcher(self)
+
+class Switcher(Race):
+        
+          def switch(self,name):
+                   method_name= str(name)
+                   method=getattr(self,method_name,lambda :'Invalid')
+                   return method()
+          def Dwarf(self,subrace):
+                  
