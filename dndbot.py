@@ -11,7 +11,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler, ConversationHandler, Filters
 
 from definitions import CLASSES_BUTTONS, RACES_BUTTONS, DESCRIPTIONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
-from charmaker import (newpg, set_pg_name, class_picker, race_picker, attributes_picker, cancel_pg,
+from pgcreation import (newpg, set_pg_name, class_picker, race_picker, attributes_picker, cancel_pg,
                         NAME, CLASS, RACE, ATTRIBUTES)
 
 # Enable logging
