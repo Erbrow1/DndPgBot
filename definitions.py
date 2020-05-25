@@ -105,14 +105,6 @@ class Race:
                         "cha" : 0
                 }
         
-        def switch (self,name):
-                        switcher = {
-                                "Dwarf": Dwarf,
-                                "Elf" : Elf
-                        }
-                        func= switcher.get(self, lambda : "invalid race")
-                        return func()
-        
         def set_race(self, name, subrace):
                 self.name = name
                 self.subrace = subrace
@@ -125,4 +117,3 @@ class Switcher(Race):
                    method=getattr(self,method_name,lambda :'Invalid')
                    return method()
           def Dwarf(self,subrace):
-                  
