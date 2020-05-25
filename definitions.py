@@ -74,7 +74,7 @@ DESCRIPTIONS = {
         "Human":        ("TODO"),
         "Tiefling":     ("TODO"),
         "Neutral":      "Literally wanted to play edgy evil character but party said NO"
-    }   
+    }
 
 ALIGNMENT_BUTTONS = [[InlineKeyboardButton("Lawful Good", callback_data="Lawful Good"),
         InlineKeyboardButton("Neutral Good", callback_data="Neutral Good"),
@@ -94,31 +94,30 @@ def ATTRIBUTE_MENU(attr):
 
 
 class Race:
-        SUB_RACE={
-                "Dwarf" :"Hill" :{
-                                "con" : 2,
-                                "wis" : 1
-                        },
-                        "Mountain":{
-                                "str": 2,
-                                "con": 2
-                        }
-                "Elf" : "Drow":{
-                                "dex": 2,
-                                "cha": 1,
-                        },
-                        "High Elf":{
-                                "dex": 2,
-                                "int": 1
-
-                        },
-                        "Wood Elf":{
-                                "dex" :2,
-                                "wis" :1
-                        }
+    SUB_RACE={
+        "Dwarf" : {
+            "Hill" : {
+                "con" : 2,
+                "wis" : 1
+                },
+            "Mountain":{
+                "str": 2,
+                "con": 2
                 }
-                
-                        
+        "Elf" : {
+            "Drow": {
+                "dex": 2,
+                "cha": 1,
+                },
+            "High Elf":{
+                "dex": 2,
+                "int": 1
+                },
+            "Wood Elf":{
+                "dex" :2,
+                "wis" :1
+                }
+            }
         }
         def __init__(self):
                 self.name= "nome"
@@ -131,10 +130,10 @@ class Race:
                         "wis" : 0,
                         "cha" : 0
                 }
-        
+
         def set_race(self, name, subrace):
                 self.name = name
                 self.subrace = subrace
                 for att in SUB_RACE[name][subrace]:
                         self.attr_mod[att] += SUB_RACE[name][subrace][att]
-        
+
