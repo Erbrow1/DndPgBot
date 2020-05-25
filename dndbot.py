@@ -32,7 +32,8 @@ pg_base = {
         "con": 0,
         "int": 0,
         "wis": 0,
-        "cha": 0
+        "cha": 0,
+        "extra": 0
         },
     "level": 1,
     "experience": 0,
@@ -44,7 +45,7 @@ pg_base = {
     "background" : "Gay",
     "FIELDNUMBER": 0,
     "UNASSIGNED_ATTRS": ["str", "dex", "con", "int", "wis", "cha"],
-    "ATTR_VALUES": [ 12, 13, 10, 8, 14, 15 ]
+    "ATTR_VALUES": [ 8, 10, 12, 13, 14, 15 ]
     }
 
 FIELDS = [ "class", "race", "alignment", "attributes" ]
