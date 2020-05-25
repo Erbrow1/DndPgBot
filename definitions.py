@@ -94,30 +94,47 @@ def ATTRIBUTE_MENU(attr):
 
 
 class Race:
-    SUB_RACE={
-        "Dwarf" : {
-            "Hill" : {
-                "con" : 2,
-                "wis" : 1
+        SUB_RACE = {
+                "Dwarf" : {
+                "Hill Dwarf" : {
+                        "con" : 2,
+                        "wis" : 1
+                        },
+                "Mountai Dwarf":{
+                        "str": 2,
+                        "con": 2
+                        }
                 },
-            "Mountain":{
-                "str": 2,
-                "con": 2
+                "Elf" : {
+                "Drow": {
+                        "dex": 2,
+                        "cha": 1,
+                        },
+                "High Elf":{
+                        "dex": 2,
+                        "int": 1
+                        },
+                "Wood Elf":{
+                        "dex" :2,
+                        "wis" :1
+                        }
+                },
+                "Gnome":{
+                        "Deep Gnome":{
+                                "int" : 2,
+                                "dex" : 1
+                        },
+                        "Rock Gnome":{
+                                "int": 2,
+                                "con":1
+                        }
+                },
+                "Half-Elf":{
+                        "Half-Elf":{
+                                "cha" : 2,
+                                "extra":2
+                        }
                 }
-        "Elf" : {
-            "Drow": {
-                "dex": 2,
-                "cha": 1,
-                },
-            "High Elf":{
-                "dex": 2,
-                "int": 1
-                },
-            "Wood Elf":{
-                "dex" :2,
-                "wis" :1
-                }
-            }
         }
         def __init__(self):
                 self.name= "nome"
@@ -128,12 +145,14 @@ class Race:
                         "con" : 0,
                         "int" : 0,
                         "wis" : 0,
-                        "cha" : 0
+                        "cha" : 0,
+                        "extra": 0
                 }
 
         def set_race(self, name, subrace):
                 self.name = name
                 self.subrace = subrace
-                for att in SUB_RACE[name][subrace]:
-                        self.attr_mod[att] += SUB_RACE[name][subrace][att]
+                
+                for att in self.SUB_RACE[name][subrace]:
+                        self.attr_mod[att] += self.SUB_RACE[name][subrace][att]
 
