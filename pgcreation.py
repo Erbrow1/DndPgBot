@@ -6,7 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryH
 
 from definitions import CLASSES_BUTTONS, RACES_BUTTONS, DESCRIPTIONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
 
-NAME, CLASS, RACE, SUBRACE, ATTRIBUTES = range(4)
+NAME, CLASS, RACE, ATTRIBUTES = range(5)
 
 default_values = [ 15, 14, 13, 12, 10, 8 ]
 
@@ -76,28 +76,6 @@ def class_picker(update, context):
         query.edit_message_text(text=DESCRIPTIONS[query.data], reply_markup=reply_markup)
         return CLASS
 
-def subrace_picker(update, context):
-    query = update.callback_query
-    query.answer()
-    if query.data == "Confirm":
-        query.edit_message_text(text=DESCRIPTIONS[context.user_data["race"]])
-        reply_markup = InlineKeyboardMarkup(ATTRIBUTE_MENU(context.user_data["UNASSIGNED_ATTRS"]))
-        txt = (f"Yadda yadda describe what attributes do\nYou still need to assign {context.user_data['ATTR_VALUES']}\n"
-                f"Your attributes are:\nSTR: {context.user_data['attributes']['str']} | DEX: {context.user_data['attributes']['dex']} | CON: {context.user_data['attributes']['con']} | "
-                f"INT: {context.user_data['attributes']['int']} | WIS: {context.user_data['attributes']['wis']} | CHA: {context.user_data['attributes']['cha']}\n"
-                f"Which attribute should get a {context.user_data['ATTR_VALUES'][-1]}?")
-        update.effective_message.reply_text(txt, reply_markup=reply_markup)
-        return ATTRIBUTES
-    elif query.data == "Back":
-        reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
-        query.edit_message_text("Choose your race", reply_markup=reply_markup)
-        return RACE
-    else:
-        context.user_data["race"] = query.data
-        reply_markup = InlineKeyboardMarkup(CONFIRM)
-        query.edit_message_text(text=DESCRIPTIONS[query.data], reply_markup=reply_markup)
-        return RACE
-
 def race_picker(update, context):
     query = update.callback_query
     query.answer()
@@ -119,6 +97,7 @@ def race_picker(update, context):
         reply_markup = InlineKeyboardMarkup(CONFIRM)
         query.edit_message_text(text=DESCRIPTIONS[query.data], reply_markup=reply_markup)
         return RACE
+
 
 def attributes_picker(update, context):
     query = update.callback_query
