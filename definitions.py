@@ -36,34 +36,34 @@ DESCRIPTIONS = {
         "Bard" :        ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png\n"
                         "The bard is a standard playable character class in many editions of the Dungeons & Dragons fantasy role-playing game."
                         " The bard class is versatile, capable of combat and of magic (divine magic in earlier editions, arcane magic in later editions)."
-                        " Bards use their artistic talents to induce magical effects."),
+                        "Bards use their artistic talents to induce magical effects."),
         "Cleric" :      ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/371/420/618/636272706155064423.png\n"
                         "Clerics are versatile figures, both capable in combat and skilled in the use of divine magic (thaumaturgy)."
                         " Clerics are powerful healers due to the large number of healing and curative magics available to them. "
                         "With divinely-granted abilities over life or death, they are also able to repel or control undead creatures."),
-        "Druid" :       ("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ab728018-e315-44d3-88f3-12a0045cc5f3/d7vzcro-bd38a4b1-623b-47ac-bec3-c2448fcc4dae.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYWI3MjgwMTgtZTMxNS00NGQzLTg4ZjMtMTJhMDA0NWNjNWYzXC9kN3Z6Y3JvLWJkMzhhNGIxLTYyM2ItNDdhYy1iZWMzLWMyNDQ4ZmNjNGRhZS5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.n4z0-Nu1qLhyL2iN78LIBEs8b0tZroqLcN0q3gBAIBY"
+        "Druid" :       ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/346/420/618/636272691461725405.png\n"
                         "Whether calling on the elemental forces of nature or emulating the creatures of the animal world, druids are an embodiment of nature's resilience, cunning, and fury."
                         " They claim no mastery over nature, but see themselves as extensions of nature's indomitable will."),
-        "Fighter" :     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/359/420/618/636272697874197438.png"
+        "Fighter" :     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/359/420/618/636272697874197438.png\n"
                         "Fighters share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. "
                         "They are well acquainted with death, both meting it out and staring it defiantly in the face. You must have a Dexterity or Strength score of 13 or higher in order to multiclass in or out of this class."),
-        "Monk":         ("https://www.seekpng.com/png/detail/107-1073422_monk-d-d-monk.png"
+        "Monk":         ("https://www.seekpng.com/png/detail/107-1073422_monk-d-d-monk.png\n"
                         "Monks of the Way of the Open Hand are the ultimate masters of martial arts Combat, whether armed or unarmed."
                         "They learn Techniques to push and trip their opponents, manipulate ki to heal damage to their bodies, and practice advanced meditation that can protect them from harm."),
-        "Paladin":      ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/365/420/618/636272701937419552.png"
+        "Paladin":      ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/365/420/618/636272701937419552.png\n"
                         "Oath of Devotion. The Oath of Devotion binds a paladin to the loftiest ideals of justice, virtue, and order."
                         "Sometimes called cavaliers, white knights, or holy warriors, these paladins meet the ideal of the knight in shining armor, acting with honor in pursuit of justice and the greater good."),
-        "Ranger":       ("https://lootthebody.files.wordpress.com/2015/09/teagan_2.jpg?w=736"
+        "Ranger":       ("https://lootthebody.files.wordpress.com/2015/09/teagan_2.jpg?w=736\n"
                         "Far from the bustle of cities and towns, past the hedges that shelter the most distant farms from the terrors of the wild,"
                         " amid the dense-packed trees of trackless forests and across wide and empty plains, rangers keep their unending watch."),
-        "Rogue":        ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/384/420/618/636272820319276620.png"
+        "Rogue":        ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/384/420/618/636272820319276620.png\n"
                         "Rogues rely on skill, stealth, and their foes' vulnerabilities to get the upper hand in any situation. They have a knack for finding the solution to just about any problem, demonstrating a resourcefulness and versatility that is the cornerstone of any successful adventuring party"),
-        "Sorcerer":     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/485/420/618/636274643818663058.png"
+        "Sorcerer":     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/485/420/618/636274643818663058.png\n"
                         "Sorcerers carry a magical birthright conferred upon them by an exotic bloodline, some otherworldly influence, or exposure to unknown cosmic forces. No one chooses sorcery; the power chooses the sorcerer."
                         "You must have a Charisma score of 13 or higher in order to multiclass in or out of this class."),
-        "Warlock":      ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/375/420/618/636272708661726603.png"
+        "Warlock":      ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/375/420/618/636272708661726603.png\n"
                         "Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular. You must have a Charisma score of 13 or higher in order to multiclass in or out of this class."),
-        "Wizard":       ("https://vignette.wikia.nocookie.net/forgottenrealms/images/c/c0/Wizard_PHB5e.jpg/revision/latest?cb=20140921185413"
+        "Wizard":       ("https://vignette.wikia.nocookie.net/forgottenrealms/images/c/c0/Wizard_PHB5e.jpg/revision/latest?cb=20140921185413\n"
                         "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, brute-force mind control, and much more."),
         "DragonBorn":   (""),
         "Dwarf":        (""),
