@@ -95,8 +95,7 @@ def ATTRIBUTE_MENU(attr):
 
 class Race:
         SUB_RACE={
-                "Dwarf" :{
-                        "Hill" :{
+                "Dwarf" :"Hill" :{
                                 "con" : 2,
                                 "wis" : 1
                         },
@@ -104,17 +103,15 @@ class Race:
                                 "str": 2,
                                 "con": 2
                         }
-                }
-                "Elf" : {
-                        "Drow":{
+                "Elf" : "Drow":{
                                 "dex": 2,
                                 "cha": 1,
-                        }
+                        },
                         "High Elf":{
                                 "dex": 2,
                                 "int": 1
 
-                        }
+                        },
                         "Wood Elf":{
                                 "dex" :2,
                                 "wis" :1
