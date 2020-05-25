@@ -54,10 +54,10 @@ def stop(update, context):
     reply_markup = ReplyKeyboardRemove()
     context.bot.send_message(chat_id=update.message.chat_id, text="Disabled buttons", reply_markup=reply_markup)
 
-def me(update,context):
+def sheet(update,context):
     """Self informations"""
-    user = update.effective_user
-    update.message.reply_text(f"Benvenuto {user['username']}\nNome : {user['first_name']}\nCognome: {user['last_name']}\nID: {user['id']} ")
+    pg=context.bot_data[update.effective_user['id']][context.args[0]]
+    update.message.reply_text(f"Character Sheet of {pg['name']} \n ")
 
 def error(update, context):
     """Log Errors caused by Updates."""
@@ -84,7 +84,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("stop",stop))
-    dp.add_handler(CommandHandler("me",me))
+    dp.add_handler(CommandHandler("sheet",sheet))
     dp.add_handler(CommandHandler("roll",roll))
     dp.add_handler(CommandHandler("help",help))
     dp.add_handler(CommandHandler("listchar", listchar))
