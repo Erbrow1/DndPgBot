@@ -153,6 +153,6 @@ class Race:
                 self.name = name
                 self.subrace = subrace
                 
-                for att in SUB_RACE[name][subrace]:
-                        self.attr_mod[att] += SUB_RACE[name][subrace][att]
+                for att in self.SUB_RACE[name][subrace]:
+                        self.attr_mod[att] += self.SUB_RACE[name][subrace][att]
 
