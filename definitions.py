@@ -92,7 +92,37 @@ def ATTRIBUTE_MENU(attr):
         ATTRIBUTE_BUTTONS[0].append(InlineKeyboardButton(val, callback_data=val))
     return ATTRIBUTE_BUTTONS
 
+
 class Race:
+        SUB_RACE={
+                "Dwarf" :{
+                        "Hill" :{
+                                "con" : 2,
+                                "wis" : 1
+                        },
+                        "Mountain":{
+                                "str": 2,
+                                "con": 2
+                        }
+                }
+                "Elf" : {
+                        "Drow":{
+                                "dex": 2,
+                                "cha": 1,
+                        }
+                        "High Elf":{
+                                "dex": 2,
+                                "int": 1
+
+                        }
+                        "Wood Elf":{
+                                "dex" :2,
+                                "wis" :1
+                        }
+                }
+                
+                        
+        }
         def __init__(self):
                 self.name= "nome"
                 self.subrace= "subrace"
@@ -108,12 +138,6 @@ class Race:
         def set_race(self, name, subrace):
                 self.name = name
                 self.subrace = subrace
-                Switcher(self)
-
-class Switcher(Race):
+                for att in SUB_RACE[name][subrace]:
+                        self.attr_mod[att] += SUB_RACE[name][subrace][att]
         
-          def switch(self,name):
-                   method_name= str(name)
-                   method=getattr(self,method_name,lambda :'Invalid')
-                   return method()
-          def Dwarf(self,subrace):
