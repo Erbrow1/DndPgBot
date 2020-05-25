@@ -57,7 +57,7 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt="Character Sheet of <b>{pg['name']}</b>\n"
+    txt=f"<body style=\"background-color:powderblue;\">\n<h1>This is a Character Sheet of <b>{pg['name']}</b></h1>"
     context.bot.send_message(chat_id=update.message.chat_id, 
                  text=txt, 
                  parse_mode='HTML')
