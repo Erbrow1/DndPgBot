@@ -63,7 +63,7 @@ MENUS = {
 def start(update, context):
     """Send a message when the command /start is issued."""
     custom_keyboard = [['/makepg', '/roll'],
-                   ['/help']]
+                   ['/help','/listchar']]
     reply_markup = ReplyKeyboardMarkup(custom_keyboard)
     context.bot.send_message(chat_id=update.message.chat_id,
                  text="Welcome to an Interactive Character creation! Press /makepg to start",
