@@ -92,3 +92,41 @@ def ATTRIBUTE_MENU(attr):
         ATTRIBUTE_BUTTONS[0].append(InlineKeyboardButton(val, callback_data=val))
     return ATTRIBUTE_BUTTONS
 
+class Race:
+        def __init__(self):
+                self.name= "nome"
+                self.subrace= "subrace"
+                self.attr_mod.str=0
+                self.attr_mod.dex=0
+                self.attr_mod.con=0
+                self.attr_mod.int=0
+                self.attr_mod.wis=0
+                self.attr_mod.cha=0
+        def set_race(self,race,subrace):
+                self.name= race
+                self.subrace= subrace
+                switch (race) {
+                        case "Dwarf":   self.attr_mod.con =2
+                                        if self.subrace == "Hill":
+                                                self.attr_mod.wis = 1
+                                        elif self.subrace == "Mountain":
+                                                self.attr_mod.str= 2
+                        case "Elf":     self.attr_mod.dex = 2
+                                        if self.subrace == "Drow":
+                                                self.attr_mod.cha =1 
+                                        elif self.subrace == "High Elf":
+                                                self.attr_mod.int =1
+                                        elif self.subrace == "Wood Elf":
+                                                self.attr_mod.wis = 1
+                        case "Gnome":   self.attr_mod.int = 2
+                                        if  self.subrace == "Deep":
+                                                self.attr_mod.dex=1
+                                        elif self.subrace == "Rock":
+                                                sel.attr_mod.con =1
+                        case "Half-Elf":
+                        case "Halfling":
+                        case "Half-Orc":
+                        case "Human":
+                        case "Tiefling":
+                        default :
+                }
