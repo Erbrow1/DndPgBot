@@ -6,7 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryH
 
 from definitions import CLASSES_BUTTONS, RACES_BUTTONS, DESCRIPTIONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
 
-NAME, CLASS, RACE, ATTRIBUTES = range(5)
+NAME, CLASS, RACE, ATTRIBUTES = range(4)
 
 default_values = [ 15, 14, 13, 12, 10, 8 ]
 
