@@ -41,7 +41,7 @@ DESCRIPTIONS = {
                         "Clerics are versatile figures, both capable in combat and skilled in the use of divine magic (thaumaturgy)."
                         " Clerics are powerful healers due to the large number of healing and curative magics available to them. "
                         "With divinely-granted abilities over life or death, they are also able to repel or control undead creatures."),
-        "Druid" :       ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/346/420/618/636272691461725405.png\n"
+        "Druid" :       ([]("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/346/420/618/636272691461725405.png)\n"
                         "Whether calling on the elemental forces of nature or emulating the creatures of the animal world, druids are an embodiment of nature's resilience, cunning, and fury."
                         " They claim no mastery over nature, but see themselves as extensions of nature's indomitable will."),
         "Fighter" :     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/359/420/618/636272697874197438.png\n"
