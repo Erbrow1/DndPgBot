@@ -65,7 +65,7 @@ DESCRIPTIONS = {
                         "Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular. You must have a Charisma score of 13 or higher in order to multiclass in or out of this class."),
         "Wizard":       ("https://vignette.wikia.nocookie.net/forgottenrealms/images/c/c0/Wizard_PHB5e.jpg/revision/latest?cb=20140921185413\n"
                         "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, brute-force mind control, and much more."),
-        "DragonBorn":   ("TODO"),
+        "Dragonborn":   ("TODO"),
         "Dwarf":        ("TODO"),
         "Elf":          ("TODO"),
         "Gnome":        ("TODO"),
