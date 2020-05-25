@@ -80,24 +80,6 @@ def roll(update,context):
         num= random.randint(1,int(context.args[0]))
     update.message.reply_text(f"You rolled {num}")
 
-def display(query, context, field, value=None):
-    if FIELDS[context.user_data["FIELDNUMBER"]] == "attributes" and field != "confirm":
-        txt = (f"Yadda yadda describe what attributes do\nYou still need to assign {context.user_data['ATTR_VALUES']}\n"
-                f"Your attributes are:\nSTR: {context.user_data['attributes']['str']} | DEX: {context.user_data['attributes']['dex']} | CON: {context.user_data['attributes']['con']} | "
-                f"INT: {context.user_data['attributes']['int']} | WIS: {context.user_data['attributes']['wis']} | CHA: {context.user_data['attributes']['cha']}\n"
-                f"Which attribute should get a {context.user_data['ATTR_VALUES'][-1]}?")
-    elif value is None:
-        txt = f"Choose your {field}"
-    elif value in DESCRIPTIONS:
-        txt = DESCRIPTIONS[value]
-    else:
-        txt = "TODO"
-    if FIELDS[context.user_data["FIELDNUMBER"]] == "attributes" and field != "confirm":
-        reply_markup = InlineKeyboardMarkup(ATTRIBUTE_MENU(context.user_data["UNASSIGNED_ATTRS"]))
-    else:
-        reply_markup = InlineKeyboardMarkup(MENUS[field])
-    query.edit_message_text(text=txt, reply_markup=reply_markup)
-
 def newpg(update, context):
     """Starts the assisted character creation"""
     update.message.reply_text("How should your character be named?")
@@ -187,55 +169,6 @@ def cancel(update, context):
     context.user_data.clear()
     update.message.reply_text("Character creation cancelled")
     return ConversationHandler.END
-
-
-def makepg(update, context):
-    """Makes a new pg"""
-    if len(context.args) < 1:
-        return update.message.reply_text('[!] You need to provide a character name')
-    name = context.args[0]
-    uid = update.effective_user['id']
-    if context.user_data != {}:
-        return update.message.reply_text('[!] You are already making a character!')
-    context.user_data.update(copy.deepcopy(pg_base))
-    context.user_data['name'] = name
-    context.user_data['FIELDNUMBER'] = 0
-    reply_markup = InlineKeyboardMarkup(CLASSES_BUTTONS)
-    update.message.reply_text('Choose your class', reply_markup=reply_markup)
-
-def button(update, context):
-    query = update.callback_query
-
-    # CallbackQueries need to be answered, even if no notification to the user is needed
-    # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
-    uid = update.effective_user['id']
-    query.answer()
-    if context.user_data != {}:
-        if query.data == "Confirm":
-            context.user_data["FIELDNUMBER"] +=1
-        elif query.data == "Back":
-            if FIELDS[context.user_data["FIELDNUMBER"]] == "attributes":
-                context.user_data["ATTR_VALUES"] = copy.deepcopy(pg_base["ATTR_VALUES"])
-                context.user_data["UNASSIGNED_ATTRS"] = copy.deepcopy(pg_base["UNASSIGNED_ATTRS"])
-            pass
-        elif FIELDS[context.user_data["FIELDNUMBER"]] == "attributes":
-            context.user_data["UNASSIGNED_ATTRS"].remove(query.data)
-            context.user_data["attributes"][query.data] = context.user_data["ATTR_VALUES"][-1]
-            context.user_data["ATTR_VALUES"] = context.user_data["ATTR_VALUES"][:-1]
-            if context.user_data["UNASSIGNED_ATTRS"] == []:
-                return display(query, context, "confirm", "areyousure")
-        else:
-            context.user_data[FIELDS[context.user_data["FIELDNUMBER"]]] = query.data
-            return display(query, context, "confirm", query.data)
-        if context.user_data["FIELDNUMBER"] >= len(FIELDS):
-            query.edit_message_text(text="Character created")
-            if uid in context.bot_data:
-                context.bot_data[uid][context.user_data['name']] = copy.deepcopy(context.user_data)
-            else:
-                context.bot_data[uid] = { context.user_data['name'] : copy.deepcopy(context.user_data) }
-            context.user_data.clear()
-        else:
-            display(query, context, FIELDS[context.user_data["FIELDNUMBER"]])
 
 def listchar(update, context):
     # TODO print all fields
