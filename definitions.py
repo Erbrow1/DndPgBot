@@ -70,6 +70,7 @@ DESCRIPTIONS = {
         "Elf":          ("TODO"),
         "Gnome":        ("TODO"),
         "Half-Elf":     ("TODO"),
+        "Halfling":     ("TODO"),
         "Half-Orc":     ("TODO"),
         "Human":        ("TODO"),
         "Tiefling":     ("TODO"),
