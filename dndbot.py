@@ -67,11 +67,11 @@ def start(update, context):
                    ['/help','/listchar']]
     reply_markup = ReplyKeyboardMarkup(custom_keyboard)
     context.bot.send_message(chat_id=update.message.chat_id,
-                 text="Welcome to an Interactive Character creation! Press /makepg to start",
+                 text="Welcome to an Interactive Character creation! Press /newpg to start",
                  reply_markup=reply_markup)
 
 def help(update, context):
-    update.message.reply_text('Command List:\n/help (Show this list)\n/me (User informations)\n/makepg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)')
+    update.message.reply_text('Command List:\n/help (Show this list)\n/me (User informations)\n/newpg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)')
 
 def roll(update,context):
     if len(context.args)<1 :
@@ -212,13 +212,11 @@ def main():
 
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("stop",stop))
     dp.add_handler(CommandHandler("me",me))
-    dp.add_handler(CommandHandler("makepg",makepg))
     dp.add_handler(CommandHandler("roll",roll))
     dp.add_handler(CommandHandler("help",help))
     dp.add_handler(CommandHandler("listchar", listchar))
-    # dp.add_handler(CallbackQueryHandler(button))
-    dp.add_handler(CommandHandler("stop",stop))
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('newpg', newpg)],
