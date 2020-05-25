@@ -57,7 +57,7 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt=f("This is a Character Sheet of {pg['name']}\n 1.Numero1"
+    txt=(f"This is a Character Sheet of {pg['name']}\n 1.Numero1"
         "\n+Numero2"
         "\n+Numero3"
         "\n    1.Ricomincia dentro da 1"
