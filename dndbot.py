@@ -11,7 +11,7 @@ from uuid import uuid4
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler
 
-from definitions import CLASSES_BUTTONS, RACES_BUTTONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
+from definitions import CLASSES_BUTTONS, RACES_BUTTONS, DESCRIPTIONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -56,21 +56,7 @@ MENUS = {
     "alignment": ALIGNMENT_BUTTONS
     }
 
-DESCRIPTIONS = {
-    "areyousure": "Do you want to confirm your attributes? Going back will start attribute assignment over",
-    "Barbarian" : ("https://i.pinimg.com/originals/d3/e1/4b/d3e14b7c318ff2ddb4fe25fda8757d4f.jpg\nTo a barbarian, though, "
-                   "civilization is no virtue, but a sign of weakness. The strong embrace their animal nature—keen instincts, "
-                   "primal physicality, and ferocious rage. ... Barbarians come alive in the chaos of combat.\n They can "
-                   "enter a berserk state where rage takes over, giving them superhuman strength and resilience."),
-    "Bard" : ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/369/420/618/636272705936709430.png\n"
-                  "The bard is a standard playable character class in many editions of the Dungeons & Dragons fantasy role-playing game."
-                  " The bard class is versatile, capable of combat and of magic (divine magic in earlier editions, arcane magic in later editions). Bards use their artistic talents to induce magical effects."),
-    "Cleric" :("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/371/420/618/636272706155064423.png\n"
-                 "Clerics are versatile figures, both capable in combat and skilled in the use of divine magic (thaumaturgy)."
-                 " Clerics are powerful healers due to the large number of healing and curative magics available to them. With divinely-granted abilities over life or death, they are also able to repel or control undead creatures."),
-    "Wizard": "Skiidaadle Skidoodle your dick is now a noodle,hehehehe",
-    "Neutral": "Literally wanted to play edgy evil character but party said NO"
-    }
+
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
