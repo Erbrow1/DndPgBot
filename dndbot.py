@@ -58,14 +58,14 @@ def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
     txt=(f"This is a Character Sheet of {pg['name']}\n 1.Numero1"
-        "\n+Numero2"
-        "\n+Numero3"
-        "\n    1.Ricomincia dentro da 1"
-        "\n*Torna fuori da 4?"
-        "\n"
-        "\nVediamo la check list"
-        "\n- [ ] Non checkato"
-        "\n- [x] checkato")
+        "\r+Numero2"
+        "\r+Numero3"
+        "\r    1.Ricomincia dentro da 1"
+        "\r*Torna fuori da 4?"
+        "\r\r"
+        "\rVediamo la check list"
+        "\r- [ ] Non checkato"
+        "\r- [x] checkato")
     context.bot.send_message(chat_id=update.message.chat_id, 
                             text=txt, 
                             parse_mode='Markdown')
