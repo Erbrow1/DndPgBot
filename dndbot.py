@@ -24,15 +24,19 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    custom_keyboard = [['/newpg', '/roll'],
-                   ['/help','/listchar']]
-    reply_markup = ReplyKeyboardMarkup(custom_keyboard)
+    custom_keyboard = [['/sheet', '/newpg', '/roll'],
+                   ['/help', '/delchar']]
+    reply_markup = ReplyKeyboardMarkup(custom_keyboard, resize_keyboard=True)
     context.bot.send_message(chat_id=update.message.chat_id,
                  text="Welcome to an Interactive Character creation! Press /newpg to start",
                  reply_markup=reply_markup)
 
 def help(update, context):
-    update.message.reply_text('Command List:\n/help (Show this list)\n/me (User informations)\n/newpg \"PgName\" (Create new character)\n/roll \"Number\" (roll rando number from 1 to Number)')
+    update.message.reply_text("<b>Command List</b>\n"
+                              "<u>/newpg</u> Create new character\n"
+                              "<u>/sheet [pgname]</u> Show character sheet of <i>pgname</i> (or all characters if no name is given)\n"
+                              "<u>/roll number</u> Roll randon integer from 1 to <i>number</i>\n"
+                              "<u>/delchar pgname</u> Delete character named <i>pgname</i>", parse_mode="HTML")
 
 def roll(update,context):
     if len(context.args)<1 :
@@ -41,29 +45,32 @@ def roll(update,context):
         num= random.randint(1,int(context.args[0]))
     update.message.reply_text(f"You rolled {num}")
 
-def listchar(update, context):
-    # TODO print all fields
-    text = ""
-    if update.effective_user['id'] not in context.bot_data:
-        return update.message.reply_text("[!] You have no characters")
-    for char in context.bot_data[update.effective_user['id']].values():
-        text += f"{char['name']} ({char['race']} {char['class']})\n"
-    update.message.reply_text(text)
-
 def stop(update, context):
     reply_markup = ReplyKeyboardRemove()
     context.bot.send_message(chat_id=update.message.chat_id, text="Disabled buttons", reply_markup=reply_markup)
 
 def sheet(update,context):
     """Self informations"""
-    pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt= (f"<b>{pg['name']}</b> - {pg['alignment']}\n<u>{pg['race']} {pg['class']} (lvl {pg['level']})</u>\n\n<pre>STR  DEX  CON  INT  WIS  CHA \n"
-          f" {pg['attributes']['str']:02d}   {pg['attributes']['dex']:02d}   {pg['attributes']['con']:02d}   "
-          f"{pg['attributes']['int']:02d}   {pg['attributes']['wis']:02d}   {pg['attributes']['cha']:02d}\n\nSkills : TODO\n</pre>\n"
-          f"Proficiencies : <s>{pg['proficiencies']}</s>\nFeats : <s>{pg['feats']}</s>\nGear : <s>{pg['gear']}</s>\n\nSpells : <s>{pg['spells']}</s>")
-    context.bot.send_message(chat_id=update.message.chat_id,
-                            text=txt,
-                            parse_mode='HTML')
+    if len(context.args) > 1 and context.args[0] in context.bot_data[update.effective_user['id']]:
+        tgt_pgs = [ context.args[0] ]
+    else:
+        tgt_pgs = list(context.bot_data[update.effective_user['id']].keys())
+    for pgname in tgt_pgs:
+        pg = context.bot_data[update.effective_user['id']][pgname]
+        txt = (f"<b>{pg['name']}</b> - {pg['alignment']}\n<u>{pg['race']} {pg['class']} (lvl {pg['level']})</u>\n\n<pre>STR  DEX  CON  INT  WIS  CHA \n"
+              f" {pg['attributes']['str']:02d}   {pg['attributes']['dex']:02d}   {pg['attributes']['con']:02d}   "
+              f"{pg['attributes']['int']:02d}   {pg['attributes']['wis']:02d}   {pg['attributes']['cha']:02d}\n\nSkills : TODO\n</pre>\n"
+              f"Proficiencies : <s>{pg['proficiencies']}</s>\nFeats : <s>{pg['feats']}</s>\nGear : <s>{pg['gear']}</s>\n\nSpells : <s>{pg['spells']}</s>")
+        context.bot.send_message(chat_id=update.message.chat_id, text=txt, parse_mode='HTML')
+
+def delchar(update, context):
+    if len(context.args) < 1:
+        return update.message.reply_text("You need to provide a name to delete")
+    fdb = context.bot_data[update.effective_user['id']].pop(context.args[0], None)
+    if fdb is None:
+        update.message.reply_text(f"No character named [{context.args[0]}]")
+    else:
+        update.message.reply_text(f"Successfully deleted [{context.args[0]}]")
 
 def error(update, context):
     """Log Errors caused by Updates."""
