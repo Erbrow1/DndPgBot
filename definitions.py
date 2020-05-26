@@ -165,3 +165,86 @@ class Race:
                 for att in self.SUB_RACE[name][subrace]:
                         self.attr_mod[att] += self.SUB_RACE[name][subrace][att]
 
+
+LEVELS = {
+        "1" :{
+            "next_lvl" :300,
+            "prof": 2
+        },
+        "2" :{
+            "next_lvl" :900,
+            "prof": 2
+        },
+        "3" :{
+            "next_lvl" :2700,
+            "prof": 2
+
+        },
+        "4" :{
+            "next_lvl" :6500,
+            "prof": 2
+        },
+        "5" :{
+            "next_lvl" :14000,
+            "prof": 3
+        },
+        "6" :{
+            "next_lvl" :23000,
+            "prof": 3
+        },
+        "7" :{
+            "next_lvl" :34000,
+            "prof": 3
+        },
+        "8" :{
+            "next_lvl" :48000,
+            "prof": 3
+        },
+        "9" :{
+            "next_lvl" :64000,
+            "prof": 4
+        },
+        "10":{
+            "next_lvl" :85000,
+            "prof": 4
+        },
+        "11":{
+            "next_lvl" :100000,
+            "prof": 4
+        },
+        "12":{
+            "next_lvl" :120000,
+            "prof": 4
+        },
+        "13":{
+            "next_lvl" :140000,
+            "prof": 5
+        },
+        "14":{
+            "next_lvl" :165000,
+            "prof": 5
+        },
+        "15":{
+            "next_lvl" :195000,
+            "prof": 5
+        },
+        "16":{
+            "next_lvl" :225000,
+            "prof": 5
+        },
+        "17":{
+            "next_lvl" :26500,
+            "prof": 6
+        },
+        "18":{
+            "next_lvl" :30500,
+            "prof": 6
+        },
+        "19":{
+            "next_lvl" :355000,
+            "prof": 6
+        },
+        "20":{
+            "prof": 6
+        }
+    }
