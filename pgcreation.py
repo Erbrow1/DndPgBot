@@ -10,6 +10,36 @@ NAME, CLASS, RACE, ALIGNMENT, ATTRIBUTES = range(5)
 
 default_values = [ 15, 14, 13, 12, 10, 8 ]
 
+
+class character(object):
+    def __init__(self, name):
+        self.name = name
+        self.pgclass = None
+        self.race = None
+        self.background = None
+        self.alignment = None
+        self.attributes = {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+            }
+        self.skills = {
+            ""
+            }
+        self.proficiencies = []
+        self.feats = []
+        self.gear = []
+        self.spells = []
+        self.UNASSIGNED_ATTRS = [ "str", "dex",
+                                  "con", "int",
+                                  "wis", "cha" ]
+
+
+
+
 pg_base = {
     "name": "",
     "class": "",
