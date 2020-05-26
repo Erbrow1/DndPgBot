@@ -78,7 +78,7 @@ DESCRIPTIONS = {
         "Neutral Good": ("TODO"),
         "Chaotic Good": ("TODO"),
         "Lawful Neutral":("TODO"),
-        "Neutral":      "Literally wanted to play edgy evil character but party said NO"
+        "Neutral":      "Literally wanted to play edgy evil character but party said NO",
         "Chaotic Neutral":("TODO"),
         "Lawful Evil":("TODO"),
         "Neutral Evil":("TODO"),
