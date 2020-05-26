@@ -66,32 +66,32 @@ DESCRIPTIONS = {
         "Wizard":       ("https://vignette.wikia.nocookie.net/forgottenrealms/images/c/c0/Wizard_PHB5e.jpg/revision/latest?cb=20140921185413\n"
                         "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, brute-force mind control, and much more."),
         "Dragonborn":   ("https://vignette.wikia.nocookie.net/forgottenrealms/images/3/3b/Dragonborn-5e.png/revision/latest?cb=20200308125107"
-                        "Born of dragons, as their name proclaims, the dragonborn walk proudly through a world that greets them with fearful incomprehension."
+                        "\nBorn of dragons, as their name proclaims, the dragonborn walk proudly through a world that greets them with fearful incomprehension."
                         "Shaped by draconic gods or the dragons themselves, dragonborn originally hatched from dragon eggs as a unique race, combining the best attributes of dragons and humanoids."),
         "Dwarf":        ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/254/420/618/636271781394265550.png"
-                        "Most dwarves are lawful, believing firmly in the benefits of a well-ordered society."
+                        "\nMost dwarves are lawful, believing firmly in the benefits of a well-ordered society."
                         " They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order."
                         " Size. Dwarves stand between 4 and 5 feet tall and average about 150 pounds."),
         "Elf":          ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/7/639/420/618/636287075350739045.png"
-                        "Slender and Graceful\nWith their unearthly grace and fine features, elves appear hauntingly beautiful to humans and members of many other races."
+                        "\nSlender and Graceful\nWith their unearthly grace and fine features, elves appear hauntingly beautiful to humans and members of many other races."
                         " They are slightly shorter than humans on average, ranging from well under 5 feet tall to just over 6 feet. They are more slender than humans, weighing only 100 to 145 pounds."),
         "Gnome":        ("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRowlh18XE_Zj-dBrIF7gKHPQ-MbFDZm6xn2rREDEO0M0kNnmrd&usqp=CAU"
-                        "Gnomes are light-hearted, and even the tricksters amongst them favor harmless pranks over vicious schemes. Size."
+                        "\nGnomes are light-hearted, and even the tricksters amongst them favor harmless pranks over vicious schemes. Size."
                         " Gnomes are between 3 and 4 feet tall and weigh around 40 pounds. Your size is Small."),
         "Half-Elf":     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/481/420/618/636274618102950794.png"
-                        "Half-elves share the chaotic bent of their elven heritage. They both value personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers."
+                        "\nHalf-elves share the chaotic bent of their elven heritage. They both value personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers."
                         " They chafe at rules, resent others' demands, and sometimes prove unreliable, or at least unpredictable."),
         "Halfling":     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/256/420/618/636271789409776659.png"
-                        "As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of the old ways."
+                        "\nAs a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of the old ways."
                         " Size. Halflings average about 3 feet tall and weigh about 40 pounds."),
         "Half-Orc":     ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/466/420/618/636274570630462055.png"
-                        "Half-Orcs raised among orcs and willing to live out their lives among them are usually evil. "
+                        "\nHalf-Orcs raised among orcs and willing to live out their lives among them are usually evil. "
                         "Size: Half-Orcs are somewhat larger and bulkier than Humans, and they range from 5 to well over 6 feet tall. Your size is Medium. Speed: Your base walking speed is 30 feet."),
         "Human":        ("https://media-waterdeep.cursecdn.com/avatars/thumbnails/6/258/420/618/636271801914013762.png"
-                        "Humans are the most adaptable and ambitious people among the common races. They have widely varying tastes, morals, and customs in the many different lands where they have settled."
+                        "\nHumans are the most adaptable and ambitious people among the common races. They have widely varying tastes, morals, and customs in the many different lands where they have settled."
                         " When they settle, though, they stay: they build cities to last for the ages, and great kingdoms that can persist for long centuries."),
         "Tiefling":     ("https://dndguide.com/wp-content/uploads/2018/04/Tiefling.png"
-                        "Tiefling Traits\nTieflings share certain Racial Traits as a result of their Infernal descent. "
+                        "\nTiefling Traits\nTieflings share certain Racial Traits as a result of their Infernal descent. "
                         "Ability Score Increase: Your Intelligence score increases by 1, and your Charisma score increases by 2. Age: Tieflings mature at the same rate as Humans but live a few years longer."),
         "Lawful Good":  ("TODLawful Good. A lawful good character acts as a good person is expected or required to act. He combines a commitment to oppose evil with the discipline to fight relentlessly."
                         " He tells the truth, keeps his word, helps those in need, and speaks out against injustice.O"),
