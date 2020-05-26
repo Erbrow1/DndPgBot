@@ -74,7 +74,7 @@ def delchar(update, context):
             char_buttons[0].append([InlineKeyboardButton(pgname, callback_data=pgname)])
         reply_markup = InlineKeyboardMarkup(char_buttons)
         hndl = CallbackQueryHandler(_delchar)
-        context.dispatcher.add_handler(hndl, group="delchar")
+        context.dispatcher.add_handler(hndl, group=999)
         context.bot_data["delchar_handler"] = hndl
         update.effective_message.reply_text("Which character", reply_markup=reply_markup)
     else:
@@ -88,7 +88,7 @@ def _delchar(update, context):
     query = update.callback_query
     context.bot_data[update.effective_user['id']].pop(query.data, None)
     query.edit_message_text(f"Successfully deleted [{query.data}]")
-    context.dispatcher.remove_handler(context.bot_data["delchar_handler"], group="delchar")
+    context.dispatcher.remove_handler(context.bot_data["delchar_handler"], group=999)
     context.bot_data.pop("delchar_handler")
 
 def error(update, context):
@@ -119,7 +119,7 @@ def main():
     for k in buf:
         dp.bot_data[int(k)] = buf[k]
     # logger handler
-    dp.add_handler(MessageHandler(Filters.text, _logger), group="log")
+    dp.add_handler(MessageHandler(Filters.text, _logger), group=123)
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("stop",stop))
