@@ -55,7 +55,7 @@ def newpg(update, context):
 def set_pg_name(update, context):
     context.user_data["name"] = update.message.text
     reply_markup = InlineKeyboardMarkup(CLASSES_BUTTONS)
-    update.effective_message.reply_text("Choose your class", reply_markup=reply_markup)
+    context.bot.send_message(chat_id=update.effective_message.chat_id, text="Choose your class", reply_markup=reply_markup)
     return CLASS
 
 def class_picker(update, context):
@@ -64,7 +64,7 @@ def class_picker(update, context):
     if query.data == "Confirm":
         query.edit_message_text(text=DESCRIPTIONS[context.user_data["class"]])
         reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
-        update.effective_message.reply_text("Choose your race", reply_markup=reply_markup)
+        context.bot.send_message(chat_id=update.effective_message.chat_id, text="Choose your race", reply_markup=reply_markup)
         return RACE
     elif query.data == "Back":
         reply_markup = InlineKeyboardMarkup(CLASSES_BUTTONS)
@@ -86,7 +86,7 @@ def race_picker(update, context):
                 f"Your attributes are:\nSTR: {context.user_data['attributes']['str']} | DEX: {context.user_data['attributes']['dex']} | CON: {context.user_data['attributes']['con']} | "
                 f"INT: {context.user_data['attributes']['int']} | WIS: {context.user_data['attributes']['wis']} | CHA: {context.user_data['attributes']['cha']}\n"
                 f"Which attribute should get a {context.user_data['ATTR_VALUES'][-1]}?")
-        update.effective_message.reply_text(txt, reply_markup=reply_markup)
+        context.bot.send_message(chat_id=update.effective_message.chat_id, text=txt, reply_markup=reply_markup)
         return ATTRIBUTES
     elif query.data == "Back":
         reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
@@ -107,7 +107,7 @@ def attributes_picker(update, context):
         query.edit_message_text(text=f"<b>STR</b> {context.user_data['attributes']['str']} | <b>DEX</b> {context.user_data['attributes']['dex']} | "
                                      f"<b>CON</b> {context.user_data['attributes']['con']} | <b>INT</b> {context.user_data['attributes']['int']} | "
                                      f"<b>WIS</b> {context.user_data['attributes']['wis']} | <b>CHA</b> {context.user_data['attributes']['cha']}", parse_mode="HTML")
-        update.effective_message.reply_text("Character created successfully!")
+        context.bot.send_message(chat_id=update.effective_message.chat_id, text="Character created successfully!")
         uid = update.effective_user['id']
         if uid in context.bot_data:
             context.bot_data[uid][context.user_data['name']] = copy.deepcopy(context.user_data)
