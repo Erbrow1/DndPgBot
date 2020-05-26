@@ -57,7 +57,7 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt=''"<form class="charsheet">
+    txt='"<form class="charsheet">
   <header>
     <section class="charname">
       <label for="charname">Character Name</label><input name="charname" placeholder="Thoradin Fireforge" />
