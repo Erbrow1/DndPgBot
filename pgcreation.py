@@ -45,6 +45,7 @@ pg_base = {
     "class": "",
     "race": "",
     "alignment": "",
+    "level": "",
     "attributes": {
         "str": 0,
         "dex": 0,
@@ -54,8 +55,7 @@ pg_base = {
         "cha": 0,
         "extra": 0
         },
-    "level": 1,
-    "experience": 0,
+   
     "skills" : "LATER",
     "proficiencies": "LATER",
     "feats": "LATER",

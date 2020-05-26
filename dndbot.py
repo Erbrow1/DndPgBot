@@ -35,7 +35,7 @@ def help(update, context):
     update.message.reply_text("<b>Command List</b>\n"
                               "<u>/newpg</u> Create new character\n"
                               "<u>/sheet [pgname]</u> Show character sheet of <i>pgname</i> (or all characters if no name is given)\n"
-                              "<u>/roll [number]</u> Roll randon integer from 1 to <i>number</i> (defaults to animated d6)\n"
+                              "<u>/roll [number]</u> Roll random integer from 1 to <i>number</i> (defaults to animated d6)\n"
                               "<u>/delchar [pgname]</u> Delete character named <i>pgname</i>", parse_mode="HTML")
 
 def roll(update,context):
@@ -127,7 +127,7 @@ def main():
     dp.add_handler(CommandHandler("roll",roll))
     dp.add_handler(CommandHandler("help",help))
     dp.add_handler(CommandHandler("delchar", delchar))
-
+    
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('newpg', newpg)],
         states={
