@@ -43,7 +43,7 @@ def roll(update,context):
         num= random.randint(1,20)
     else:
         num= random.randint(1,int(context.args[0]))
-    update.message.reply_text(f"You rolled <b><u>{num}</b></u>", parse_mode="HTML")
+    update.message.reply_text(f"You rolled <b><u>{num}</u></b>", parse_mode="HTML")
 
 def stop(update, context):
     reply_markup = ReplyKeyboardRemove()
