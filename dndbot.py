@@ -57,7 +57,7 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt=''"<form class="charsheet">
+    txt='"<form class="charsheet">
   <header>
     <section class="charname">
       <label for="charname">Character Name</label><input name="charname" placeholder="Thoradin Fireforge" />
@@ -422,8 +422,8 @@ def sheet(update,context):
     </section>
   </main>
 </form>"'
-    context.bot.send_message(chat_id=update.message.chat_id, 
-                            text=txt, 
+    context.bot.send_message(chat_id=update.message.chat_id,
+                            text=txt,
                             parse_mode='Markdown')
 
 def error(update, context):
@@ -446,8 +446,10 @@ def main():
     dp = updater.dispatcher
 
     with open("chardb.json") as f:
-        dp.bot_data.update(json.load(f))
-
+        buf = json.load(f)
+    dp.bot_data.clear()
+    for k in buf:
+        dp.bot_data[int(k)] = buf[k]
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("stop",stop))
