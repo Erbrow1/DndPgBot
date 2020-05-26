@@ -60,7 +60,7 @@ def sheet(update,context):
     txt= (f"<b>{pg['name']}</b> - {pg['alignment']}\n{pg['race']} {pg['class']} (lvl {pg['level']})\n<pre>STR  DEX  CON  INT  WIS  CHA \n"
           f" {pg['attributes']['str']:02d}   {pg['attributes']['dex']:02d}   {pg['attributes']['con']:02d}   "
           f"{pg['attributes']['int']:02d}   {pg['attributes']['wis']:02d}   {pg['attributes']['cha']:02d}\n\nSkills : TODO\n</pre>\n"
-          f"Proficiencies : {pg['proficiencies']}\nFeats : {pg['feats']}\nGear : {pg['gear']}\n\nSpells : {pg['spells']}</pre>")
+          f"Proficiencies : {pg['proficiencies']}\nFeats : {pg['feats']}\nGear : {pg['gear']}\n\nSpells : {pg['spells']}")
     context.bot.send_message(chat_id=update.message.chat_id,
                             text=txt,
                             parse_mode='HTML')
