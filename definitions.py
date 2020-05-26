@@ -91,7 +91,7 @@ DESCRIPTIONS = {
                         "Humans are the most adaptable and ambitious people among the common races. They have widely varying tastes, morals, and customs in the many different lands where they have settled."
                         " When they settle, though, they stay: they build cities to last for the ages, and great kingdoms that can persist for long centuries."),
         "Tiefling":     ("https://dndguide.com/wp-content/uploads/2018/04/Tiefling.png"
-                        "Tiefling Traits\NTieflings share certain Racial Traits as a result of their Infernal descent. "
+                        "Tiefling Traits\nTieflings share certain Racial Traits as a result of their Infernal descent. "
                         "Ability Score Increase: Your Intelligence score increases by 1, and your Charisma score increases by 2. Age: Tieflings mature at the same rate as Humans but live a few years longer."),
         "Lawful Good":  ("TODLawful Good. A lawful good character acts as a good person is expected or required to act. He combines a commitment to oppose evil with the discipline to fight relentlessly."
                         " He tells the truth, keeps his word, helps those in need, and speaks out against injustice.O"),
