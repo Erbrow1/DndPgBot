@@ -102,7 +102,7 @@ def main():
     dp.add_handler(CommandHandler("sheet",sheet))
     dp.add_handler(CommandHandler("roll",roll))
     dp.add_handler(CommandHandler("help",help))
-    dp.add_handler(CommandHandler("listchar", listchar))
+    dp.add_handler(CommandHandler("delchar", delchar))
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('newpg', newpg)],
