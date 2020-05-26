@@ -35,15 +35,15 @@ def help(update, context):
     update.message.reply_text("<b>Command List</b>\n"
                               "<u>/newpg</u> Create new character\n"
                               "<u>/sheet [pgname]</u> Show character sheet of <i>pgname</i> (or all characters if no name is given)\n"
-                              "<u>/roll number</u> Roll randon integer from 1 to <i>number</i>\n"
-                              "<u>/delchar pgname</u> Delete character named <i>pgname</i>", parse_mode="HTML")
+                              "<u>/roll [number]</u> Roll randon integer from 1 to <i>number</i> (defaults 20)\n"
+                              "<u>/delchar [pgname]</u> Delete character named <i>pgname</i>", parse_mode="HTML")
 
 def roll(update,context):
     if len(context.args)<1 :
         num= random.randint(1,20)
     else:
         num= random.randint(1,int(context.args[0]))
-    update.message.reply_text(f"You rolled {num}")
+    update.message.reply_text(f"You rolled <b><u>{num}</b></u>", parse_mode="HTML")
 
 def stop(update, context):
     reply_markup = ReplyKeyboardRemove()
@@ -55,6 +55,8 @@ def sheet(update,context):
         tgt_pgs = [ context.args[0] ]
     else:
         tgt_pgs = list(context.bot_data[update.effective_user['id']].keys())
+    if tgt_pgs == []:
+        return update.message.reply_text("You don't have any character")
     for pgname in tgt_pgs:
         pg = context.bot_data[update.effective_user['id']][pgname]
         txt = (f"<b>{pg['name']}</b> - {pg['alignment']}\n<u>{pg['race']} {pg['class']} (lvl {pg['level']})</u>\n\n<pre>STR  DEX  CON  INT  WIS  CHA \n"
@@ -64,18 +66,38 @@ def sheet(update,context):
         context.bot.send_message(chat_id=update.message.chat_id, text=txt, parse_mode='HTML')
 
 def delchar(update, context):
-    if len(context.args) < 1:
-        return update.message.reply_text("You need to provide a name to delete")
-    fdb = context.bot_data[update.effective_user['id']].pop(context.args[0], None)
-    if fdb is None:
-        update.message.reply_text(f"No character named [{context.args[0]}]")
+    if context.bot_data[update.effective_user['id']] == {}:
+        update.message.reply_text("You don't have any character")
+    elif len(context.args) < 1:
+        char_buttons = []
+        for pgname in context.bot_data[update.effective_user['id']]:
+            char_buttons[0].append([InlineKeyboardButton(pgname, callback_data=pgname)])
+        reply_markup = InlineKeyboardMarkup(char_buttons)
+        hndl = CallbackQueryHandler(_delchar)
+        context.dispatcher.add_handler(hndl, group="delchar")
+        context.bot_data["delchar_handler"] = hndl
+        update.effective_message.reply_text("Which character", reply_markup=reply_markup)
     else:
-        update.message.reply_text(f"Successfully deleted [{context.args[0]}]")
+        fdb = context.bot_data[update.effective_user['id']].pop(context.args[0], None)
+        if fdb is None:
+            update.message.reply_text(f"No character named [{context.args[0]}]")
+        else:
+            update.message.reply_text(f"Successfully deleted [{context.args[0]}]")
+
+def _delchar(update, context):
+    query = update.callback_query
+    context.bot_data[update.effective_user['id']].pop(query.data, None)
+    query.edit_message_text(f"Successfully deleted [{query.data}]")
+    context.dispatcher.remove_handler(context.bot_data["delchar_handler"], group="delchar")
+    context.bot_data.pop("delchar_handler")
 
 def error(update, context):
     """Log Errors caused by Updates."""
     # logger.warning('Update "%s" caused error "%s"', update, context.error)
     traceback.print_exc()
+
+def _logger(update, context):
+    print(f"<@{update.effective_user['username']}> {update.message.text}")
 
 def main():
     """Start the bot."""
@@ -96,6 +118,8 @@ def main():
     dp.bot_data.clear()
     for k in buf:
         dp.bot_data[int(k)] = buf[k]
+    # logger handler
+    dp.add_handler(MessageHandler(Filters.text, _logger), group="log")
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("stop",stop))
