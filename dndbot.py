@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    custom_keyboard = [['/sheet', '/newpg', '/roll'],
-                   ['/help', '/delchar']]
+    custom_keyboard = [['/sheet', '/newpg', '/delchar'],
+                   ['/help', '/roll']]
     reply_markup = ReplyKeyboardMarkup(custom_keyboard, resize_keyboard=True)
     context.bot.send_message(chat_id=update.message.chat_id,
                  text="Welcome to an Interactive Character creation! Press /newpg to start",
@@ -35,15 +35,15 @@ def help(update, context):
     update.message.reply_text("<b>Command List</b>\n"
                               "<u>/newpg</u> Create new character\n"
                               "<u>/sheet [pgname]</u> Show character sheet of <i>pgname</i> (or all characters if no name is given)\n"
-                              "<u>/roll [number]</u> Roll randon integer from 1 to <i>number</i> (defaults 20)\n"
+                              "<u>/roll [number]</u> Roll randon integer from 1 to <i>number</i> (defaults to animated d6)\n"
                               "<u>/delchar [pgname]</u> Delete character named <i>pgname</i>", parse_mode="HTML")
 
 def roll(update,context):
     if len(context.args)<1 :
-        num= random.randint(1,20)
+        context.bot.send_dice(chat_id=update.message.chat_id)
     else:
         num= random.randint(1,int(context.args[0]))
-    update.message.reply_text(f"You rolled <b><u>{num}</u></b>", parse_mode="HTML")
+        update.message.reply_text(f"You rolled <b><u>{num}</u></b>", parse_mode="HTML")
 
 def stop(update, context):
     reply_markup = ReplyKeyboardRemove()
