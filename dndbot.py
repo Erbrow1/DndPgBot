@@ -57,10 +57,10 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt= (f"<b>{pg['name']}</b> - {pg['alignment']}\n{pg['race']} {pg['class']} (lvl {pg['level']})\n<pre>STR  DEX  CON  INT  WIS  CHA \n"
+    txt= (f"<b>{pg['name']}</b> - {pg['alignment']}\n<u>{pg['race']} {pg['class']} (lvl {pg['level']})</u>\n\n<pre>STR  DEX  CON  INT  WIS  CHA \n"
           f" {pg['attributes']['str']:02d}   {pg['attributes']['dex']:02d}   {pg['attributes']['con']:02d}   "
           f"{pg['attributes']['int']:02d}   {pg['attributes']['wis']:02d}   {pg['attributes']['cha']:02d}\n\nSkills : TODO\n</pre>\n"
-          f"Proficiencies : {pg['proficiencies']}\nFeats : {pg['feats']}\nGear : {pg['gear']}\n\nSpells : {pg['spells']}")
+          f"Proficiencies : <s>{pg['proficiencies']}</s>\nFeats : <s>{pg['feats']}</s>\nGear : <s>{pg['gear']}</s>\n\nSpells : <s>{pg['spells']}</s>")
     context.bot.send_message(chat_id=update.message.chat_id,
                             text=txt,
                             parse_mode='HTML')
