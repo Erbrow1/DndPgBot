@@ -104,6 +104,9 @@ def attributes_picker(update, context):
     query.answer()
     if query.data == "Confirm":
         # query.edit_message_text()
+        query.edit_message_text(text=f"<b>STR</b> {context.user_data['attributes']['str']} | <b>DEX</b> {context.user_data['attributes']['dex']} | "
+                                     f"<b>CON</b> {context.user_data['attributes']['con']} | <b>INT</b> {context.user_data['attributes']['int']} | "
+                                     f"<b>WIS</b> {context.user_data['attributes']['wis']} | <b>CHA</b> {context.user_data['attributes']['cha']}", parse_mode="HTML")
         update.effective_message.reply_text("Character created successfully!")
         uid = update.effective_user['id']
         if uid in context.bot_data:

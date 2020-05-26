@@ -71,7 +71,7 @@ def delchar(update, context):
     elif len(context.args) < 1:
         char_buttons = []
         for pgname in context.bot_data[update.effective_user['id']]:
-            char_buttons[0].append([InlineKeyboardButton(pgname, callback_data=pgname)])
+            char_buttons.append([InlineKeyboardButton(pgname, callback_data=pgname)])
         reply_markup = InlineKeyboardMarkup(char_buttons)
         hndl = CallbackQueryHandler(_delchar)
         context.dispatcher.add_handler(hndl, group=999)
