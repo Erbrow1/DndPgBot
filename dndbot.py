@@ -11,8 +11,8 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler, ConversationHandler, Filters
 
 from definitions import CLASSES_BUTTONS, RACES_BUTTONS, DESCRIPTIONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
-from pgcreation import (newpg, set_pg_name, class_picker, race_picker, attributes_picker, cancel_pg,
-                        NAME, CLASS, RACE, ATTRIBUTES)
+from pgcreation import (newpg, set_pg_name, class_picker, race_picker, attributes_picker, alignment_picker, cancel_pg,
+                        NAME, CLASS, RACE, ALIGNMENT, ATTRIBUTES)
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -134,6 +134,7 @@ def main():
             NAME: [MessageHandler(Filters.text, set_pg_name)],
             CLASS: [CallbackQueryHandler(class_picker)],
             RACE: [CallbackQueryHandler(race_picker)],
+            ALIGNMENT: [CallbackQueryHandler(alignment_picker)],
             ATTRIBUTES: [CallbackQueryHandler(attributes_picker)]
         },
         fallbacks=[CommandHandler('cancel', cancel_pg)]

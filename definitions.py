@@ -74,7 +74,15 @@ DESCRIPTIONS = {
         "Half-Orc":     ("TODO"),
         "Human":        ("TODO"),
         "Tiefling":     ("TODO"),
+        "Lawful Good":  ("TODO"),
+        "Neutral Good": ("TODO"),
+        "Chaotic Good": ("TODO"),
+        "Lawful Neutral":("TODO"),
         "Neutral":      "Literally wanted to play edgy evil character but party said NO"
+        "Chaotic Neutral":("TODO"),
+        "Lawful Evil":("TODO"),
+        "Neutral Evil":("TODO"),
+        "Chaotic Evil":("TODO")
     }
 
 ALIGNMENT_BUTTONS = [[InlineKeyboardButton("Lawful Good", callback_data="Lawful Good"),
@@ -85,7 +93,7 @@ ALIGNMENT_BUTTONS = [[InlineKeyboardButton("Lawful Good", callback_data="Lawful 
         InlineKeyboardButton("Chaotic Neutral", callback_data="Chaotic Neutral")],
         [InlineKeyboardButton("Lawful Evil", callback_data="Lawful Evil"),
         InlineKeyboardButton("Neutral Evil", callback_data="Neutral Evil"),
-        InlineKeyboardButton("Neutral Evil", callback_data="Neutral Evil")]]
+        InlineKeyboardButton("Chaotic Evil", callback_data="Chaotic Evil")]]
 
 def ATTRIBUTE_MENU(attr):
     ATTRIBUTE_BUTTONS = [[]]
@@ -153,7 +161,7 @@ class Race:
         def set_race(self, name, subrace):
                 self.name = name
                 self.subrace = subrace
-                
+
                 for att in self.SUB_RACE[name][subrace]:
                         self.attr_mod[att] += self.SUB_RACE[name][subrace][att]
 

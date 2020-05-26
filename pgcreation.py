@@ -6,7 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryH
 
 from definitions import CLASSES_BUTTONS, RACES_BUTTONS, DESCRIPTIONS, ALIGNMENT_BUTTONS, CONFIRM, ATTRIBUTE_MENU
 
-NAME, CLASS, RACE, ATTRIBUTES = range(4)
+NAME, CLASS, RACE, ALIGNMENT, ATTRIBUTES = range(5)
 
 default_values = [ 15, 14, 13, 12, 10, 8 ]
 
@@ -35,15 +35,6 @@ pg_base = {
     "FIELDNUMBER": 0,
     "UNASSIGNED_ATTRS": ["str", "dex", "con", "int", "wis", "cha"],
     "ATTR_VALUES": [ 8, 10, 12, 13, 14, 15 ]
-    }
-
-FIELDS = [ "class", "race", "alignment", "attributes" ]
-
-MENUS = {
-    "confirm": CONFIRM,
-    "class": CLASSES_BUTTONS,
-    "race": RACES_BUTTONS,
-    "alignment": ALIGNMENT_BUTTONS
     }
 
 def newpg(update, context):
@@ -81,13 +72,9 @@ def race_picker(update, context):
     query.answer()
     if query.data == "Confirm":
         query.edit_message_text(text=DESCRIPTIONS[context.user_data["race"]])
-        reply_markup = InlineKeyboardMarkup(ATTRIBUTE_MENU(context.user_data["UNASSIGNED_ATTRS"]))
-        txt = (f"Yadda yadda describe what attributes do\nYou still need to assign {context.user_data['ATTR_VALUES']}\n"
-                f"Your attributes are:\nSTR: {context.user_data['attributes']['str']} | DEX: {context.user_data['attributes']['dex']} | CON: {context.user_data['attributes']['con']} | "
-                f"INT: {context.user_data['attributes']['int']} | WIS: {context.user_data['attributes']['wis']} | CHA: {context.user_data['attributes']['cha']}\n"
-                f"Which attribute should get a {context.user_data['ATTR_VALUES'][-1]}?")
-        context.bot.send_message(chat_id=update.effective_message.chat_id, text=txt, reply_markup=reply_markup)
-        return ATTRIBUTES
+        reply_markup = InlineKeyboardMarkup(ALIGNMENT_BUTTONS)
+        context.bot.send_message(chat_id=update.effective_message.chat_id, text="Choose your alignment", reply_markup=reply_markup)
+        return ALIGNMENT
     elif query.data == "Back":
         reply_markup = InlineKeyboardMarkup(RACES_BUTTONS)
         query.edit_message_text("Choose your race", reply_markup=reply_markup)
@@ -98,6 +85,27 @@ def race_picker(update, context):
         query.edit_message_text(text=DESCRIPTIONS[query.data], reply_markup=reply_markup)
         return RACE
 
+def alignment_picker(update, context):
+    query = update.callback_query
+    query.answer()
+    if query.data == "Confirm":
+        query.edit_message_text(text=DESCRIPTIONS[context.user_data["alignment"]])
+        reply_markup = InlineKeyboardMarkup(ATTRIBUTE_MENU(context.user_data["UNASSIGNED_ATTRS"]))
+        txt = (f"Yadda yadda describe what attributes do\nYou still need to assign {context.user_data['ATTR_VALUES']}\n"
+                f"Your attributes are:\nSTR: {context.user_data['attributes']['str']} | DEX: {context.user_data['attributes']['dex']} | CON: {context.user_data['attributes']['con']} | "
+                f"INT: {context.user_data['attributes']['int']} | WIS: {context.user_data['attributes']['wis']} | CHA: {context.user_data['attributes']['cha']}\n"
+                f"Which attribute should get a {context.user_data['ATTR_VALUES'][-1]}?")
+        context.bot.send_message(chat_id=update.effective_message.chat_id, text=txt, reply_markup=reply_markup)
+        return ATTRIBUTES
+    elif query.data == "Back":
+        reply_markup = InlineKeyboardMarkup(ALIGNMENT_BUTTONS)
+        query.edit_message_text("Choose your alignment", reply_markup=reply_markup)
+        return ALIGNMENT
+    else:
+        context.user_data["alignment"] = query.data
+        reply_markup = InlineKeyboardMarkup(CONFIRM)
+        query.edit_message_text(text=DESCRIPTIONS[query.data], reply_markup=reply_markup)
+        return ALIGNMENT
 
 def attributes_picker(update, context):
     query = update.callback_query
