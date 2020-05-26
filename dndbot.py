@@ -57,10 +57,9 @@ def stop(update, context):
 def sheet(update,context):
     """Self informations"""
     pg=context.bot_data[update.effective_user['id']][context.args[0]]
-    txt= (f"<table style='width:100%'><tr><th>%</th><th>{pg['name']}</th><th>%</th></tr><tr><td>{pg['race']}</td>"
-          f"<td>{pg['class']}</td><td>{pg['level']}</td></tr><tr><td>{pg['attributes']['str']}</td><td>{pg['attributes']['dex']}</td>"
-          f"<td>{pg['attributes']['con']}</td></tr><tr><td>{pg['attributes']['int']}</td><td>{pg['attributes']['wis']}</td>"
-          f"<td>{pg['attributes']['cha']}</td></tr></table>")
+    txt= (f"<pre>{pg['name']}\n{pg['race']} {pg['class']} (lvl {pg['level']})\n STR  DEX  CON  INT  WIS  CHA \n"
+          f"  {pg['attributes']['str']:02d}   {pg['attributes']['dex']:02d}   {pg['attributes']['con']:02d}   "
+          f"{pg['attributes']['int']:02d}   {pg['attributes']['wis']:02d}   {pg['attributes']['cha']:02d}</pre>")
     context.bot.send_message(chat_id=update.message.chat_id,
                             text=txt,
                             parse_mode='HTML')
